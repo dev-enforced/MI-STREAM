@@ -1,8 +1,34 @@
-.App{
-    display:flex;
-    flex-direction:column;
-    width: 100%;
-    min-height: 100vh;
-    flex-grow: 1;
+.App {
+  all: initial;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  flex-grow: 1;
 }
 
+:root {
+  --bg-clr-choice: #ecf0ee;
+  --heading-clr-choice: #1c2538;
+  --text-clr-choice: #685e6f;
+}
+
+.dark {
+  --bg-clr-choice: #1c2538;
+  --heading-clr-choice: #25a8ee;
+  --text-clr-choice: #ecf0ee;
+}
+
+.App {
+  background-color: var(--bg-clr-choice);
+  color: var(--text-clr-choice);
+}
+
+.g-flex-space-evenly{
+  justify-content: space-evenly;   
+}
+
+.miBtn{
+  border: transparent;
+  background: transparent;
+}
