@@ -1,7 +1,11 @@
 import React from "react";
-import { SidebarProvider } from "context";
+import { SidebarProvider, ThemeProvider } from "context";
 
 const CombinedProvider = ({ children }) => {
-  return <SidebarProvider>{children}</SidebarProvider>;
+  return (
+    <ThemeProvider>
+      <SidebarProvider>{children}</SidebarProvider>
+    </ThemeProvider>
+  );
 };
 export { CombinedProvider };
