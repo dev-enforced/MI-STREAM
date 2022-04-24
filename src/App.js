@@ -1,12 +1,17 @@
 import styles from "./App.module.css";
 import { AppRoutes } from "routes";
-import { UpperNavbar } from "components";
+import { UpperNavbar, Sidebar } from "components";
 
 function App() {
   return (
-    <div className={`${styles.App}`}>
+    <div className={`${styles.App} `}>
       <UpperNavbar />
-      <AppRoutes />
+      <div className={`${styles.pageContent}`}>
+        <Sidebar />
+        <div className={`${styles.mainContent}`}>
+          <AppRoutes />
+        </div>
+      </div>
     </div>
   );
 }

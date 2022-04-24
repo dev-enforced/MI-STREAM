@@ -10,7 +10,6 @@
     rgba(9, 30, 66, 0.08) 0px 0px 1px 1px;
   z-index: 10;
 }
-
 .iconBtn,
 .iconBtnSm {
   cursor: pointer;
@@ -18,14 +17,17 @@
   margin: 0.5rem;
   background: transparent;
 }
-
 .iconBtn i {
   font-size: 1.6rem;
+  color: var(--text-clr-choice);
+}
+.iconBtn span {
+  color: var(--text-clr-choice);
 }
 .iconBtnSm i {
   font-size: 1.2rem;
+  color: var(--text-clr-choice);
 }
-
 .miBrand {
   cursor: pointer;
   background: transparent;
@@ -40,7 +42,9 @@
   color: var(--text-clr-choice);
   border: 1px solid rgb(165, 165, 165);
 }
-
+.miSearchSection i {
+  color: var(--text-clr-choice);
+}
 .miSearchSection input {
   flex: 1 1;
   background-color: var(--bg-clr-choice);
@@ -48,10 +52,12 @@
   outline: transparent;
   border: transparent;
 }
-
 .searchForMobile,
 .showMenuBtn {
   display: none;
+}
+.showMenuBtn i {
+  color: var(--text-clr-choice);
 }
 .searchForMobile .miSearchSection {
   width: 95%;
