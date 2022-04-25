@@ -1,0 +1,8 @@
+.miBtn{
+  border: transparent;
+  background: transparent;
+  color: var(--text-clr-choice);
+}
+.display-none{
+  display: none;
+}
