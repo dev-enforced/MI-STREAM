@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSidebar, useTheme } from "context";
 import { NavVideoSearch } from "components";
 import styles from "./UpperNavbar.module.css";
@@ -10,17 +10,21 @@ const UpperNavbar = () => {
   const toggleTheme = () => {
     setDarkMode((prev) => !prev);
   };
+  const { pathname } = useLocation();
+  const notAllowedSections = ["/"];
   return (
     <header className={`p-2 ${styles.miHeader}`}>
       <nav className={`p-2 g-flex-row g-flex-space-between-align-center`}>
-        <button
-          className={`mr-4 ${styles.iconBtn}`}
-          onClick={() => {
-            setSidebarView((prev) => !prev);
-          }}
-        >
-          <i className="fas fa-bars"></i>
-        </button>
+        {!notAllowedSections.includes(pathname) && (
+          <button
+            className={`mr-4 ${styles.iconBtn}`}
+            onClick={() => {
+              setSidebarView((prev) => !prev);
+            }}
+          >
+            <i className="fas fa-bars"></i>
+          </button>
+        )}
         <Link className="link-none" to="/">
           <button
             className={`${styles.miBrand} fw-600 pos-relative text-cursor-pointer`}
@@ -37,7 +41,7 @@ const UpperNavbar = () => {
               {darkMode ? "dark_mode" : "light_mode"}
             </span>
           </button>
-          <button className={`miBtn`}>LOGIN</button>
+          <button className={`miBtn text-cursor-pointer`}>LOGIN</button>
         </div>
       </nav>
       <div className={`${styles.searchForMobile}`}>
