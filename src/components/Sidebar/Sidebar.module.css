@@ -23,13 +23,14 @@
   align-items: flex-end;
 }
 
-.sidebarWithIconsIndividualLink{
+.sidebarWithIconsIndividualLink {
   cursor: pointer;
   padding: 0.875rem;
-  border-radius:var(--border-rd-circle);
+  border-radius: var(--border-rd-circle);
   aspect-ratio: 1/1;
 }
-.sidebarLink:hover,.sidebarWithIconsIndividualLink:hover{
+.sidebarLink:hover,
+.sidebarWithIconsIndividualLink:hover {
   background-color: var(--icon-hover-clr-bg);
 }
 
