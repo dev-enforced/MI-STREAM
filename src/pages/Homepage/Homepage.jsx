@@ -1,6 +1,13 @@
 import React from "react";
-import styles from "./Homepage.module.css";
+import { ImageSlider } from "components/ImageSlider/ImageSlider";
+import { sliderImages } from "constants";
 const Homepage = () => {
-  return <></>;
+  return (
+    <div>
+      <section>
+        <ImageSlider imagesProvided={sliderImages}/>
+      </section>
+    </div>
+  );
 };
 export { Homepage };
