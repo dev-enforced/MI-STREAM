@@ -1,0 +1,24 @@
+.categories_wrapper{
+    margin:1.3rem auto;
+    max-width: 80%;
+    gap:1.2rem;
+}
+
+.categories_section_heading{
+    font-family: 'Catamaran',sans-serif;
+    max-width: 25rem;
+    padding-bottom: 5px;
+    position: relative;
+    text-align: center;
+}
+
+.categories_section_heading:after{
+    content:'';
+    position:absolute;
+    bottom:0;
+    left:50%;
+    height: var(--border-rd-sm);
+    transform: translateX(-50%);
+    width: 8rem;
+    background-color: var(--text-clr-choice);
+}
