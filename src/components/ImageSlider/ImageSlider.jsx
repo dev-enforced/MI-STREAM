@@ -8,7 +8,7 @@ const ImageSlider = ({ imagesProvided }) => {
       infiniteLoop
       autoPlay
       showStatus={false}
-      interval={4000}
+      interval={3000}
     >
       {imagesProvided.map((everyImageUrl, index) => {
         return (
