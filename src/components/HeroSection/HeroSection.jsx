@@ -25,7 +25,7 @@ const HeroSection = () => {
         </p>
       </section>
       <section className={`${styles.heroImageContainer}`}>
-        <img src="assets/HeroSectionImage.svg" alt="" />
+        <img src="assets/HeroSectionImage.svg" alt="Interview Process Familiar" />
       </section>
     </div>
   );
