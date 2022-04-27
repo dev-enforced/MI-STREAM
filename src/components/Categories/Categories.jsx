@@ -11,7 +11,7 @@ const Categories = ({ categoriesGiven }) => {
                 <img
                   src="https://i.imgur.com/qhE9KtV.jpg"
                   className={`${styles.categoryImage}`}
-                  alt="CATEGORY DUMMY IMAGE"
+                  alt={everyCategory}
                 />
               </div>
               <div className={`${styles.categoryInfoContainer}`}>
