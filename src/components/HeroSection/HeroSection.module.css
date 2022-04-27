@@ -1,0 +1,46 @@
+.heroSection{
+    padding:1rem 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    justify-content: space-around;
+    gap:2rem 0;
+}
+
+.heroContent{
+    gap:1rem;
+    max-width: 25rem;
+}
+.heroContentHeading{
+    font-family: 'Catamaran',sans-serif;
+    max-width: 25rem;
+    padding-bottom: 10px;
+    position: relative;
+    text-align: center;
+}
+
+.heroContentHeading:after{
+    content:'';
+    position:absolute;
+    bottom:0;
+    left:50%;
+    height: var(--border-rd-sm);
+    transform: translateX(-50%);
+    width: 8rem;
+    background-color: var(--text-clr-choice);
+}
+.heroContent p{
+    line-height: 1.5rem;
+    text-align: justify;
+}
+
+.heroImageContainer{
+    max-width: 40rem;
+    width: 100%;
+}
+
+@media only screen and (max-width:1500px) {
+    .heroImageContainer{
+        order:-1;
+        max-width: 35rem;
+    }
+}
