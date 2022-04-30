@@ -10,6 +10,7 @@ const Categories = ({ categoriesGiven }) => {
               <div className={`${styles.categoryImageContainer}`}>
                 <img
                   src="https://i.imgur.com/qhE9KtV.jpg"
+                  loading="lazy"
                   className={`${styles.categoryImage}`}
                   alt={everyCategory}
                 />
