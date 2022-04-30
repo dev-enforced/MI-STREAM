@@ -16,8 +16,7 @@ export const categories = [
   {
     _id: uuid(),
     categoryName: "Management Entrances",
-    imgUrl:
-      "https://imgs.search.brave.com/f4Kv94_9EtFJOsKfHnwZwtcDIvdIUYcadV77xcBQ5RU/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly94bHJp/ai5yZW1vdGV4cy5p/bi9zaXRlcy9kZWZh/dWx0L2ZpbGVzLzUt/NS5qcGc",
+    imgUrl: "https://xlrij.remotexs.in/sites/default/files/5-5.jpg",
     description:
       "After cracking the entrance exam, your next challenge is to perform well in the WAT-PI round. It is your one shot to make an impression on your dream B-school of why you'd make a great fit in the classroom. Students who crack this round prepare themselves for personal, technical and case study questions.",
   },
@@ -33,7 +32,7 @@ export const categories = [
     _id: uuid(),
     categoryName: "Public Sector Professions",
     imgUrl:
-      "https://imgs.search.brave.com/f4Kv94_9EtFJOsKfHnwZwtcDIvdIUYcadV77xcBQ5RU/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly94bHJp/ai5yZW1vdGV4cy5p/bi9zaXRlcy9kZWZh/dWx0L2ZpbGVzLzUt/NS5qcGc",
+      "https://pbs.twimg.com/media/FOBpsu1VIAIonlX?format=jpg",
     description:
       "Business Organisations/Public services run by the government for public purpose also have a competitive hiring process involving interviews testing technical abilities of an individual and how well does the candidate perform under pressure. Considered as one of the toughest learning from the experiences of ones who cleared it make the candidate get familiar with what they are going to face in the final round.",
   },
