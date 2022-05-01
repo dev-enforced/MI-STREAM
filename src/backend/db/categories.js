@@ -9,7 +9,8 @@ export const categories = [
   {
     _id: uuid(),
     categoryName: "Product Management",
-    imgUrl: "https://pmschool.io/static/media/img2.e2a239f4.png",
+    imgUrl:
+      "https://www.tcgen.com/wp-content/uploads/2021/06/product-portfolio-management-process-1536x1086.png",
     description:
       "Product management involves driving the vision, strategy, design, and execution of an organisation's product. While one can often quickly comprehend the basic responsibilities of the role, mastering each of these dimensions is truly an art form that one is constantly honing",
   },
@@ -26,14 +27,13 @@ export const categories = [
     imgUrl:
       "https://techcrunch.com/wp-content/uploads/2020/01/GettyImages-695646904.jpg?w=1390&crop=1",
     description:
-      "Software Engineering why use an engineering approach to software? Quite simply, because the alternative would be to use an ad-hoc or disordered approach. An engineering approach means predictability and quantifiable results through the application of theories, methodologies, frameworks, and tools. When applied efficiently, the result is high-quality software created in a cost-effective manner.",
+      "Why use an engineering approach to software? Quite simply, because the alternative would be to use a disordered approach. An engineering approach means predictability and quantifiable results through the efficient application of theories, methodologies, frameworks, and tools to develop high-quality software in a cost-effective manner.",
   },
   {
     _id: uuid(),
     categoryName: "Public Sector Professions",
-    imgUrl:
-      "https://pbs.twimg.com/media/FOBpsu1VIAIonlX?format=jpg",
+    imgUrl: "https://pbs.twimg.com/media/FOBpsu1VIAIonlX?format=jpg",
     description:
-      "Business Organisations/Public services run by the government for public purpose also have a competitive hiring process involving interviews testing technical abilities of an individual and how well does the candidate perform under pressure. Considered as one of the toughest learning from the experiences of ones who cleared it make the candidate get familiar with what they are going to face in the final round.",
+      "Services provided by the government for public purposes also have a competitive hiring process involving interviews testing how well does the candidate perform under pressure. Learning from the experiences of ones who cleared it make the candidate get familiar with what they are going to face in the final round.",
   },
 ];

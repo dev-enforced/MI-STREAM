@@ -1,4 +1,5 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { receiveAllVideos } from "services";
 const VideosContext = createContext(null);
 
 const useVideos = () => {
@@ -9,9 +10,26 @@ const useVideos = () => {
   return contextReceived;
 };
 
-
 const VideosProvider = ({ children }) => {
-  return <VideosContext.Provider>{children}</VideosContext.Provider>;
+  const [videosList, setVideosList] = useState([]);
+  const getVideos = async () => {
+    try {
+      const {
+        data: { videos: videosAvailable },
+      } = await receiveAllVideos();
+      setVideosList(videosAvailable);
+    } catch (videoSetupError) {
+      console.error("ERROR OCCURED WHILE SETTING UP VIDEOS:", videoSetupError);
+    }
+  };
+  useEffect(() => {
+    getVideos();
+  }, []);
+  return (
+    <VideosContext.Provider value={{ videosList, setVideosList }}>
+      {children}
+    </VideosContext.Provider>
+  );
 };
 
 export { useVideos, VideosProvider };
