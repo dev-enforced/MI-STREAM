@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./VideoCard.module.css";
-import { getVideoImg,viewCountFormatter } from "utilities";
+import { getVideoImg, viewCountFormatter } from "utilities";
+import { VideoMenuOptions } from "components";
 const VideoCard = ({ videoDetails }) => {
   const { _id, title, viewQuantity, dateOfUpload } = videoDetails;
+  const [videoMenuOptionsView, setVideoMenuOptionsView] = useState(false);
   return (
     <div className={`${styles.video_card_container}`}>
       <img
@@ -14,6 +16,11 @@ const VideoCard = ({ videoDetails }) => {
         <p className={`${styles.video_card_title}`}>{title}</p>
         <div className={`${styles.video_card_options_container}`}>
           {/* DROPDOWN OF OPTIONS RELATED TO CARD */}
+          <VideoMenuOptions
+            selectedVideo={videoDetails}
+            videoMenuOptionsView={videoMenuOptionsView}
+            setVideoMenuOptionsView={setVideoMenuOptionsView}
+          />
         </div>
       </div>
       <div className={`${styles.video_card_more_details}`}>

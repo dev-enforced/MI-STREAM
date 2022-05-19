@@ -8,3 +8,4 @@ export { HeroSection } from "./HeroSection/HeroSection";
 export { Categories } from "./Categories/Categories";
 export { CategoryChips } from "./CategoryChips/CategoryChips";
 export { VideoCard } from "./VideoCard/VideoCard";
+export { VideoMenuOptions } from "./VideoMenuOptions/VideoMenuOptions";

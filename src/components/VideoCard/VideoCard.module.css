@@ -15,18 +15,19 @@
 
 .video_card_content {
   display: flex;
+  justify-content: space-between;
   gap: 0.25rem;
   padding: 0 0.5rem;
 }
 
 .video_card_title {
-  display: --webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
   font-weight: 500;
   overflow: hidden;
-  line-clamp: 2;
   text-overflow: ellipsis;
-  --webkit-line-clamp: 2;
-  --webkit-box-orient: vertical;
 }
 
 .video_card_options_container {
@@ -37,8 +38,8 @@
   visibility: visible;
 }
 
-.video_card_content_separator{
-    font-size: 8px;
+.video_card_content_separator {
+  font-size: 8px;
 }
 
 .video_card_more_details {
@@ -63,6 +64,10 @@
   .video_card_content,
   .video_card_more_details {
     padding: 0;
+  }
+
+  .video_card_options_container {
+    visibility: visible;
   }
 }
 
