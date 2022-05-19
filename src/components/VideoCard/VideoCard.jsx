@@ -11,6 +11,7 @@ const VideoCard = ({ videoDetails }) => {
         src={getVideoImg(_id)}
         alt={title}
         className={`${styles.video_card_img}`}
+        loading="lazy"
       />
       <div className={`${styles.video_card_content}`}>
         <p className={`${styles.video_card_title}`}>{title}</p>

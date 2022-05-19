@@ -12,7 +12,7 @@ const ExplorePage = () => {
       </>
       <section className={`${styles.video_listing} g-flex-row g-flex-wrap`}>
         {
-            videosList.map((everyVideo)=>{
+            videosList?.map((everyVideo)=>{
                 return (
                     <VideoCard videoDetails={everyVideo}/>
                 )

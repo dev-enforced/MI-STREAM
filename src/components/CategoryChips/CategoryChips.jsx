@@ -18,7 +18,7 @@ const CategoryChips = () => {
           ALL
         </label>
       </div>
-      {categoriesList.map(({ _id, categoryName }) => {
+      {categoriesList?.map(({ _id, categoryName }) => {
         return (
           <div key={_id} className={`pos-relative`}>
             <input

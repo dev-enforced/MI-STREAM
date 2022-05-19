@@ -3,7 +3,7 @@ import styles from "./Categories.module.css";
 const Categories = ({ categoriesGiven }) => {
   return (
     <div className={`${styles.categoriesContainer}`}>
-      {categoriesGiven.map((everyCategory) => {
+      {categoriesGiven?.map((everyCategory) => {
         const {_id,categoryName,imgUrl,description}=everyCategory;
         return (
           <div key={_id} className={`${styles.categoryItem}`}>
