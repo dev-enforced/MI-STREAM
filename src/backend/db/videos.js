@@ -124,15 +124,15 @@ export const videos = [
       "This video explains the UPSC mock interview for IES .I hope it will be helpful for the upcoming aspirants and ongoing interview too",
   },
   {
-    _id: "5h16I7DFTfk",
-    title: "Mock Interview with a candidate for XLRI",
-    creatorName: "SMARG Education",
-    creatorId: "ytc/AKedOLThL6BTdnNtWDzdOHP356dbqsBlXW7q5oQ7jMh1xA",
-    viewQuantity: "109",
-    dateOfUpload: "Mar 15, 2022",
+    _id: "YIF16wbSdXo",
+    title: "How to Ace XLRI Interviews Ft. XLRI Jamshedpur BM Students",
+    creatorName: "Inside IIM-Konversations",
+    creatorId: "ytc/AKedOLSnPp8RjduKDs4dvsPW6o8db8SOH3cVk_X7f8WLRQ",
+    viewQuantity: "2532",
+    dateOfUpload: "Feb 4, 2022",
     categoryName: "Management Entrances",
     description:
-      "Watch this continuous mock interview assessment of Aakash Verma an IIT Delhi Graduate while applying for XLRI: One of the reputed management institutes across India.",
+      "XAT'22 results are out and now it's time to gear up for the next stage of B-school admissions.Since aspirants need to get their hands on a lot of things for WAT-PI, it’s important to have a structured approach towards the preparation.A lot of organised prep is required to ace this round due to its unpredictability. From past academics, work experience, hobbies, current affairs to personal details, aspirants need to get their hands on a variety of things.We understand that in such a situation, having some profound guidance is the supreme need of all the aspirants. To help you with the same, we've got on board a bunch of previous years XAT Toppers who made it to XLRI BM Programme. This program is extremely prestigious and is rated as one of the finest of its kind in the country. PI for BM will mostly revolve around your academics and/or your work experience. It is highly likely that the Interviewers will ask you your favorite subject and then start throwing questions of that subject around you.Panelists will take up live questions and all questions you could have for this stage.",
   },
   {
     _id: "ohVstQAAZyY",
@@ -161,7 +161,7 @@ export const videos = [
   },
   {
     _id: "205VkDzUnjU",
-    title: "Product Management Interview Prep",
+    title: "Product Management Interview Preparation Masterclass by Byjus PM",
     creatorName: "Shravan Tickoo",
     creatorId:
       "YKf2W8Fp6U9ToaTDOOW0lJjqRMALns96vCczR65HzluyZ4NE8xXAEEZ0DWZQvExunKvPI6gf",
@@ -188,7 +188,7 @@ export const videos = [
     creatorName: "Unacademy Origins",
     creatorId:
       "ruH_HExT-flzdUNaBggo-4tOnIMZquEipn7u3oTndnSs6MoFUHdhXIHyy3igcLkw-LWGb67G",
-    viewQuantity: "57,582",
+    viewQuantity: "57582",
     dateOfUpload: "Mar 1, 2020",
     categoryName: "Management Entrances",
     description:

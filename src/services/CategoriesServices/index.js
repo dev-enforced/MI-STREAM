@@ -1,0 +1,1 @@
+export { receiveAllCategories } from "./receiveAllCategories";

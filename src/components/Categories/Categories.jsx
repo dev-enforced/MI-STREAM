@@ -3,27 +3,27 @@ import styles from "./Categories.module.css";
 const Categories = ({ categoriesGiven }) => {
   return (
     <div className={`${styles.categoriesContainer}`}>
-      {categoriesGiven.map((everyCategory) => {
+      {categoriesGiven?.map((everyCategory) => {
+        const {_id,categoryName,imgUrl,description}=everyCategory;
         return (
-          <div key={everyCategory} className={`${styles.categoryItem}`}>
+          <div key={_id} className={`${styles.categoryItem}`}>
             <div className={`${styles.categoryItemContainer}`}>
               <div className={`${styles.categoryImageContainer}`}>
                 <img
-                  src="https://i.imgur.com/qhE9KtV.jpg"
+                  src={imgUrl}
                   loading="lazy"
                   className={`${styles.categoryImage}`}
-                  alt={everyCategory}
+                  alt={categoryName}
                 />
               </div>
               <div className={`${styles.categoryInfoContainer}`}>
-                <div className={`${styles.categoryInfoHeading}`}>TRAVEL</div>
+                <div className={`${styles.categoryInfoHeading}`}>{categoryName}</div>
                 <div className={`${styles.card_info}`}>
                   <p className={`${styles.card_info_title}`}>
-                    10 Best Things about Travel
+                    SHORT INFO:
                   </p>
                   <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad,
-                    ab.
+                    {description}
                   </p>
                 </div>
               </div>

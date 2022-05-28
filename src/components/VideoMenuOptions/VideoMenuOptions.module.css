@@ -1,0 +1,44 @@
+.video_menu_btn {
+  aspect-ratio: 1/1;
+  border-radius: var(--border-rd-circle);
+  padding: 0.25rem 0.5rem;
+  border: transparent;
+  outline: transparent;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-clr-choice);
+}
+.video_menu_btn:hover{
+    background-color:var(--bg-clr-choice);
+}
+.menuOptionsContainer {
+  border-radius: var(--border-rd-sm);
+  position: absolute;
+  right: 0;
+  top: 110%;
+  text-align: center;
+  width: max-content;
+  width: -webkit-max-content;
+  box-shadow: var(--bx-shadow);
+}
+
+.menuOptionsList {
+  border: transparent;
+  border-radius:var(--border-rd-sm);
+  padding: 0.5rem 0.75rem;
+  background-color:var(--icon-background);
+  list-style: none;
+}
+.menuOptionsListItem{
+    border-radius:var(--border-rd-sm);
+    gap: 0.25rem;
+    padding: 0.5rem;
+    cursor:pointer;
+    border: 1px solid transparent;
+    border-bottom-color:var(--text-clr-choice);
+}
+
+.menuOptionsListItem:hover{
+  background-color: var(--bg-clr-choice);
+  color: var(--primary-color);
+}

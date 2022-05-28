@@ -12,7 +12,7 @@ const sidebarLinks = [
   {
     title: "Liked Videos",
     iconName: "thumb_up",
-    redirect: "/likedOnes",
+    redirect: "/likedvideos",
   },
   {
     title: "Watch Later",

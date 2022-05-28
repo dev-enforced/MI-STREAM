@@ -1,10 +1,19 @@
 import React from "react";
-import { SidebarProvider, ThemeProvider } from "context";
+import {
+  CategoriesProvider,
+  SidebarProvider,
+  ThemeProvider,
+  VideosProvider,
+} from "context";
 
 const CombinedProvider = ({ children }) => {
   return (
     <ThemeProvider>
-      <SidebarProvider>{children}</SidebarProvider>
+      <SidebarProvider>
+        <VideosProvider>
+          <CategoriesProvider>{children}</CategoriesProvider>
+        </VideosProvider>
+      </SidebarProvider>
     </ThemeProvider>
   );
 };

@@ -13,6 +13,7 @@
   --text-clr-choice: #1c2938;
   --bg-faded:#ffffff80;
   --icon-background:#e6e6e6;
+  --bx-shadow:rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .dark {
@@ -22,6 +23,7 @@
   --text-clr-choice: #ecf0ee;
   --bg-faded:#181818df;
   --icon-background:#2f2f2f;
+  --bx-shadow:rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px ;
 
 }
 
