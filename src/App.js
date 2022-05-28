@@ -1,10 +1,12 @@
 import { AppRoutes } from "routes";
-import { useTheme } from "context";
+// import { useTheme } from "context";
+import { useSelector } from "react-redux";
 import { UpperNavbar, Sidebar } from "components";
 import styles from "./App.module.css";
 
 function App() {
-  const { darkMode } = useTheme();
+  const { themeProvided } = useSelector((storeReceived) => storeReceived.theme);
+  // const { darkMode } = useTheme();
   const getClassName = (darkMode) => {
     if (darkMode) {
       return styles.dark;
@@ -13,7 +15,7 @@ function App() {
     }
   };
   return (
-    <div className={`${styles.App} ${getClassName(darkMode)}`}>
+    <div className={`${styles.App} ${getClassName(themeProvided)}`}>
       <UpperNavbar />
       <div className={`${styles.pageContent}`}>
         <Sidebar />
