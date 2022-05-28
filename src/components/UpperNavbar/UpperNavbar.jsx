@@ -1,18 +1,14 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-// import { useSidebar, useTheme } from "context";
 import { useSelector, useDispatch } from "react-redux";
 import { NavVideoSearch } from "components";
 import { updateSidebarView, updateTheme } from "reduxFiles";
 import styles from "./UpperNavbar.module.css";
 
 const UpperNavbar = () => {
-  // const { setSidebarView } = useSidebar();
-  // const { darkMode, setDarkMode } = useTheme();
   const { themeProvided } = useSelector((storeReceived) => storeReceived.theme);
   const dispatch = useDispatch();
   const toggleTheme = () => {
-    // setDarkMode((prev) => !prev);
     dispatch(updateTheme());
   };
   const toggleSidebarView=()=>{

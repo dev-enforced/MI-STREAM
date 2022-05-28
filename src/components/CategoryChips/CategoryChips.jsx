@@ -1,9 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-// import { useCategories } from "context";
 import styles from "./CategoryChips.module.css";
 const CategoryChips = () => {
-  // const { categoriesList } = useCategories();
   const { categoriesList } = useSelector(
     (storeReceived) => storeReceived.category
   );

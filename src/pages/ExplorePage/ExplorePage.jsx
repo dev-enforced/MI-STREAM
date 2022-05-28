@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
-import { CategoryChips, VideoCard } from "components";
-// import { useVideos } from "context";
 import { useDispatch, useSelector } from "react-redux";
+import { CategoryChips, VideoCard } from "components";
 import { getVideos, getCategories } from "reduxFiles";
 import styles from "./ExplorePage.module.css";
 
 const ExplorePage = () => {
-  // const { videosList } = useVideos();
   const { videosList } = useSelector((storeReceived) => storeReceived.videos);
   const dispatch = useDispatch();
   useEffect(() => {

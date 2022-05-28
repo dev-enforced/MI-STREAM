@@ -2,14 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { sidebarLinks } from "constants";
-// import { useSidebar } from "context";
-import styles from "./Sidebar.module.css";
 import { updateSidebarView } from "reduxFiles";
+import styles from "./Sidebar.module.css";
 const SidebarMinimized = () => {
-  // const { setSidebarView } = useSidebar();
   const dispatch = useDispatch();
   const toggleSidebarView = () => {
-    // setSidebarView((prev) => !prev);
     dispatch(updateSidebarView());
   };
   return (

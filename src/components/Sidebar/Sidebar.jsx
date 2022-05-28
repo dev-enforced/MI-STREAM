@@ -1,13 +1,11 @@
 import React from "react";
-// import { useSidebar } from "context";
-import { useViewDimensions } from "hooks";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useViewDimensions } from "hooks";
 import { SidebarMaximized, SidebarMinimized } from "components";
 import styles from "./Sidebar.module.css";
 
 const Sidebar = () => {
-  // const { sidebarView } = useSidebar();
   const { sidebarView } = useSelector((storeReceived) => storeReceived.sidebar);
   const viewDimensions = useViewDimensions();
   const { pathname } = useLocation();
