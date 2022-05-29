@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { ImageSlider, HeroSection, Categories } from "components";
-import { useCategories } from "context";
+import { getCategories } from "reduxFiles";
 import { sliderImages } from "constants";
 import styles from "./Homepage.module.css";
 
 const Homepage = () => {
-  const { categoriesList } = useCategories();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+  const { categoriesList } = useSelector(
+    (storeReceived) => storeReceived.category
+  );
   return (
     <>
       <section className="image-slider">

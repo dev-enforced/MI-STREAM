@@ -1,8 +1,10 @@
 import React from "react";
-import { useCategories } from "context";
+import { useSelector } from "react-redux";
 import styles from "./CategoryChips.module.css";
 const CategoryChips = () => {
-  const { categoriesList } = useCategories();
+  const { categoriesList } = useSelector(
+    (storeReceived) => storeReceived.category
+  );
   return (
     <div
       className={`gentle-flex-gap g-flex-align-center ${styles.categories_wrapper}`}

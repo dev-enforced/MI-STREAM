@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
-import { CombinedProvider } from "context";
+import { Provider } from "react-redux";
+import { storeGiven } from "reduxFiles";
 import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
@@ -11,11 +12,11 @@ makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <CombinedProvider>
-        <App />
-      </CombinedProvider>
-    </BrowserRouter>
+    <Provider store={storeGiven}>
+      <BrowserRouter>
+          <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

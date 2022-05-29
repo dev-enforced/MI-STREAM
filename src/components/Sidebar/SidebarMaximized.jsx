@@ -1,13 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { sidebarLinks } from "constants";
-import { useSidebar } from "context";
+import { updateSidebarView } from "reduxFiles";
 import styles from "./Sidebar.module.css";
 
 const SidebarMaximized = () => {
-  const { setSidebarView } = useSidebar();
+  const dispatch = useDispatch();
   const toggleSidebarView = () => {
-    setSidebarView((prev) => !prev);
+    dispatch(updateSidebarView());
   };
   return (
     <div className={`${styles.sidebarLinksContainer} g-flex-column`}>
