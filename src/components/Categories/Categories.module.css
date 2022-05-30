@@ -5,6 +5,7 @@
 .categoryItem {
   width: 25%;
   padding: 10px;
+  cursor:pointer;
 }
 .categoryItemContainer {
   background-color: var(--text-clr-choice);

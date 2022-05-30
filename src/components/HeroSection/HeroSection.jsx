@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./HeroSection.module.css";
 
 const HeroSection = () => {
@@ -23,6 +24,11 @@ const HeroSection = () => {
           it is by engaging in mock interviews helping you identify your
           strengths and weaknesses.
         </p>
+        <div className={`g-flex-column ${styles.heroBtnContainer}`}>
+          <Link to="/explore" className={`link-none ${styles.heroBtn}`}>
+            Explore Now
+          </Link>
+        </div>
       </section>
       <section className={`${styles.heroImageContainer}`}>
         <img src="assets/HeroSectionImage.svg" alt="Interview Process Familiar" loading="lazy" />

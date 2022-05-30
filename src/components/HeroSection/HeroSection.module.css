@@ -10,6 +10,7 @@
     gap:1rem;
     max-width: 25rem;
 }
+
 .heroContentHeading{
     font-family: 'Catamaran',sans-serif;
     max-width: 25rem;
@@ -28,6 +29,7 @@
     width: 8rem;
     background-color: var(--text-clr-choice);
 }
+
 .heroContent p{
     line-height: 1.5rem;
     text-align: justify;
@@ -38,9 +40,29 @@
     width: 100%;
 }
 
+.heroBtnContainer{
+    gap:0.5rem;
+    margin-top: 2.5rem;
+}
+
+.heroBtn{
+    max-width: 10rem;
+    font-weight: bold;
+    padding:0.75rem 1rem;
+    border-radius:var(--border-rd-sm);
+    border:transparent;
+    background-color: var(--primary-color);
+    color:var(--bg-clr-choice);
+    text-align: center;
+}
+
 @media only screen and (max-width:1500px) {
     .heroImageContainer{
         order:-1;
         max-width: 35rem;
+    }
+    
+    .heroBtnContainer{
+        margin-top: 0;
     }
 }

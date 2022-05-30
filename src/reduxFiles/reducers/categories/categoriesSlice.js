@@ -3,6 +3,7 @@ import { receiveAllCategories } from "services";
 const initialState = {
   status: null,
   categoriesList: [],
+  categorySelected: "All",
 };
 const categoriesSetup = async () => {
   try {
@@ -24,7 +25,11 @@ const getCategories = createAsyncThunk(
 const categoriesSlice = createSlice({
   name: "categories",
   initialState,
-  reducers: {},
+  reducers: {
+    updateCategorySelected: (state, action) => {
+      state.categorySelected = action.payload;
+    },
+  },
   extraReducers: {
     [getCategories.pending]: (state, action) => {
       state.status = "pending";
@@ -39,4 +44,5 @@ const categoriesSlice = createSlice({
   },
 });
 export { getCategories };
+export const { updateCategorySelected } = categoriesSlice.actions;
 export default categoriesSlice.reducer;

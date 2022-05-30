@@ -11,10 +11,12 @@ const useOnClickOutside = (eventHandler, referenceGiven) => {
     };
     document.addEventListener("touchstart", listenerHandler);
     document.addEventListener("mousedown", listenerHandler);
+    document.addEventListener("mouseleave",listenerHandler);
 
     return () => {
       document.removeEventListener("touchstart", listenerHandler);
       document.removeEventListener("mousedown", listenerHandler);
+      document.addEventListener("mouseleave", listenerHandler);
     };
   }, [eventHandler, referenceGiven]);
 };

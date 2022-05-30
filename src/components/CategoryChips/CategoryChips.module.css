@@ -18,8 +18,12 @@
     cursor: pointer;
     padding:0.5rem 0.75rem;
     border-radius:2rem;
-    border:1px solid var(--text-clr-choice);
+    border:1px solid var(--primary-color);
     text-align: center;
+}
+
+.category_label:hover{
+    background-color: var(--icon-hover-clr-bg);
 }
 
 .category_input:checked ~ .category_label{
