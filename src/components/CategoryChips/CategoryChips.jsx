@@ -1,20 +1,28 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styles from "./CategoryChips.module.css";
+import { updateCategorySelected } from "reduxFiles";
 const CategoryChips = () => {
-  const { categoriesList } = useSelector(
+  const dispatch = useDispatch();
+  const { categoriesList,categorySelected } = useSelector(
     (storeReceived) => storeReceived.category
   );
   return (
     <div
       className={`gentle-flex-gap g-flex-align-center ${styles.categories_wrapper}`}
     >
-      <div className={`pos-relative`}>
+      <div
+        className={`pos-relative`}
+        onClick={() => {
+          dispatch(updateCategorySelected("All"));
+        }}
+      >
         <input
           type="radio"
           name="category-choice"
           id="All"
           className={`${styles.category_input}`}
+          checked={categorySelected === "All"}
         />
         <label htmlFor="All" className={`${styles.category_label}`}>
           ALL
@@ -22,12 +30,19 @@ const CategoryChips = () => {
       </div>
       {categoriesList?.map(({ _id, categoryName }) => {
         return (
-          <div key={_id} className={`pos-relative`}>
+          <div
+            key={_id}
+            className={`pos-relative`}
+            onClick={() => {
+              dispatch(updateCategorySelected(categoryName));
+            }}
+          >
             <input
               type="radio"
               name="category-choice"
               id={categoryName}
               className={`${styles.category_input}`}
+              checked={categorySelected === categoryName}
             />
             <label
               className={`${styles.category_label}`}
