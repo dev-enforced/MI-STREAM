@@ -4,7 +4,7 @@ import styles from "./CategoryChips.module.css";
 import { updateCategorySelected } from "reduxFiles";
 const CategoryChips = () => {
   const dispatch = useDispatch();
-  const { categoriesList,categorySelected } = useSelector(
+  const { categoriesList, categorySelected } = useSelector(
     (storeReceived) => storeReceived.category
   );
   return (

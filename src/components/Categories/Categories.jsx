@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { updateCategorySelected } from "reduxFiles";
 import styles from "./Categories.module.css";
 const Categories = ({ categoriesGiven }) => {
-  const dispatch=useDispatch();
-  const navigate=useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
-    <div className={`${styles.categoriesContainer}`} >
+    <div className={`${styles.categoriesContainer}`}>
       {categoriesGiven?.map((everyCategory) => {
-        const {_id,categoryName,imgUrl,description}=everyCategory;
+        const { _id, categoryName, imgUrl, description } = everyCategory;
         return (
           <div
             key={_id}

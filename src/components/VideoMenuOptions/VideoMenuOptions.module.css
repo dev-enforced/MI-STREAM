@@ -8,8 +8,8 @@
   cursor: pointer;
   color: var(--text-clr-choice);
 }
-.video_menu_btn:hover{
-    background-color:var(--bg-clr-choice);
+.video_menu_btn:hover {
+  background-color: var(--bg-clr-choice);
 }
 .menuOptionsContainer {
   border-radius: var(--border-rd-sm);
@@ -24,21 +24,21 @@
 
 .menuOptionsList {
   border: transparent;
-  border-radius:var(--border-rd-sm);
+  border-radius: var(--border-rd-sm);
   padding: 0.5rem 0.75rem;
-  background-color:var(--icon-background);
+  background-color: var(--icon-background);
   list-style: none;
 }
-.menuOptionsListItem{
-    border-radius:var(--border-rd-sm);
-    gap: 0.25rem;
-    padding: 0.5rem;
-    cursor:pointer;
-    border: 1px solid transparent;
-    border-bottom-color:var(--text-clr-choice);
+.menuOptionsListItem {
+  border-radius: var(--border-rd-sm);
+  gap: 0.25rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-bottom-color: var(--text-clr-choice);
 }
 
-.menuOptionsListItem:hover{
+.menuOptionsListItem:hover {
   background-color: var(--bg-clr-choice);
   color: var(--primary-color);
 }

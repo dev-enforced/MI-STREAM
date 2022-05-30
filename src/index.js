@@ -14,7 +14,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={storeGiven}>
       <BrowserRouter>
-          <App />
+        <App />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

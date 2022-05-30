@@ -11,21 +11,21 @@
   --bg-clr-choice: #ecf0ee;
   --icon-hover-clr-bg: #fce0ee;
   --text-clr-choice: #1c2938;
-  --bg-faded:#ffffff80;
-  --icon-background:#e6e6e6;
-  --bx-shadow:rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
-  --primary-color:#ee6b25;
+  --bg-faded: #ffffff80;
+  --icon-background: #e6e6e6;
+  --bx-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  --primary-color: #ee6b25;
 }
 
 .dark {
   --bg-clr-choice: #1c2538;
   /* --heading-clr-choice: #25a8ee; */
-  --icon-hover-clr-bg:#34375aa3;
+  --icon-hover-clr-bg: #34375aa3;
   --text-clr-choice: #ecf0ee;
-  --bg-faded:#181818df;
-  --icon-background:#2f2f2f;
-  --bx-shadow:rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px ;
-  --primary-color:#25a8ee;
+  --bg-faded: #181818df;
+  --icon-background: #2f2f2f;
+  --bx-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  --primary-color: #25a8ee;
 }
 
 .App {
@@ -33,24 +33,24 @@
   color: var(--text-clr-choice);
 }
 
-.g-flex-space-evenly{
-  justify-content: space-evenly;   
+.g-flex-space-evenly {
+  justify-content: space-evenly;
 }
 
-.miBtn{
+.miBtn {
   border: transparent;
   background: transparent;
 }
 
-.pageContent{
+.pageContent {
   display: flex;
   position: relative;
   /* margin-top: 5rem; */
   margin-bottom: 2.5rem;
-  font-family: 'Work Sans',sans-serif;
+  font-family: "Work Sans", sans-serif;
 }
 
-.mainContent{
+.mainContent {
   flex-grow: 1;
   max-width: 100%;
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./UpperNavbar.module.css";
 const NavVideoSearch = () => {
-    
   return (
     <form
       className={`${styles.miSearchSection}  g-flex-row g-flex-align-center`}
