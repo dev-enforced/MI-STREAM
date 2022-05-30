@@ -8,7 +8,7 @@ const storeGiven = configureStore({
     theme: themeReducer,
     sidebar: sidebarReducer,
     videos: videosReducer,
-    category:categoriesReducer
+    category: categoriesReducer,
   },
 });
 export { storeGiven };

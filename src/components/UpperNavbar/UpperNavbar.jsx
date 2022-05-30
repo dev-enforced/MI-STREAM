@@ -11,9 +11,9 @@ const UpperNavbar = () => {
   const toggleTheme = () => {
     dispatch(updateTheme());
   };
-  const toggleSidebarView=()=>{
-    dispatch(updateSidebarView())
-  }
+  const toggleSidebarView = () => {
+    dispatch(updateSidebarView());
+  };
   const { pathname } = useLocation();
   const notAllowedSections = ["/"];
   return (

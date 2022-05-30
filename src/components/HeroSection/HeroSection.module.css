@@ -1,68 +1,68 @@
-.heroSection{
-    padding:1rem 0;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    justify-content: space-around;
-    gap:2rem 0;
+.heroSection {
+  padding: 1rem 0;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  justify-content: space-around;
+  gap: 2rem 0;
 }
 
-.heroContent{
-    gap:1rem;
-    max-width: 25rem;
+.heroContent {
+  gap: 1rem;
+  max-width: 25rem;
 }
 
-.heroContentHeading{
-    font-family: 'Catamaran',sans-serif;
-    max-width: 25rem;
-    padding-bottom: 10px;
-    position: relative;
-    text-align: center;
+.heroContentHeading {
+  font-family: "Catamaran", sans-serif;
+  max-width: 25rem;
+  padding-bottom: 10px;
+  position: relative;
+  text-align: center;
 }
 
-.heroContentHeading:after{
-    content:'';
-    position:absolute;
-    bottom:0;
-    left:50%;
-    height: var(--border-rd-sm);
-    transform: translateX(-50%);
-    width: 8rem;
-    background-color: var(--text-clr-choice);
+.heroContentHeading:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  height: var(--border-rd-sm);
+  transform: translateX(-50%);
+  width: 8rem;
+  background-color: var(--text-clr-choice);
 }
 
-.heroContent p{
-    line-height: 1.5rem;
-    text-align: justify;
+.heroContent p {
+  line-height: 1.5rem;
+  text-align: justify;
 }
 
-.heroImageContainer{
-    max-width: 40rem;
-    width: 100%;
+.heroImageContainer {
+  max-width: 40rem;
+  width: 100%;
 }
 
-.heroBtnContainer{
-    gap:0.5rem;
-    margin-top: 2.5rem;
+.heroBtnContainer {
+  gap: 0.5rem;
+  margin-top: 2.5rem;
 }
 
-.heroBtn{
-    max-width: 10rem;
-    font-weight: bold;
-    padding:0.75rem 1rem;
-    border-radius:var(--border-rd-sm);
-    border:transparent;
-    background-color: var(--primary-color);
-    color:var(--bg-clr-choice);
-    text-align: center;
+.heroBtn {
+  max-width: 10rem;
+  font-weight: bold;
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-rd-sm);
+  border: transparent;
+  background-color: var(--primary-color);
+  color: var(--bg-clr-choice);
+  text-align: center;
 }
 
-@media only screen and (max-width:1500px) {
-    .heroImageContainer{
-        order:-1;
-        max-width: 35rem;
-    }
-    
-    .heroBtnContainer{
-        margin-top: 0;
-    }
+@media only screen and (max-width: 1500px) {
+  .heroImageContainer {
+    order: -1;
+    max-width: 35rem;
+  }
+
+  .heroBtnContainer {
+    margin-top: 0;
+  }
 }
