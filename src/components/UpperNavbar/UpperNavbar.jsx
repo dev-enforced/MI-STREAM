@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { NavVideoSearch } from "components";
 import { updateSidebarView, updateTheme } from "reduxFiles";
@@ -44,7 +44,7 @@ const UpperNavbar = () => {
               {themeProvided ? "dark_mode" : "light_mode"}
             </span>
           </button>
-          <NavLink to="/login" className={`link-none fs-1-2 miBtn text-cursor-pointer`}>LOGIN</NavLink>
+          <button className={`miBtn text-cursor-pointer`}>LOGIN</button>
         </div>
       </nav>
       <div className={`${styles.searchForMobile}`}>
