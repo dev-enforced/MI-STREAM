@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { NavVideoSearch } from "components";
 import { updateSidebarView, updateTheme } from "reduxFiles";
 import styles from "./UpperNavbar.module.css";
+import { getActiveLoginStyle } from "utilities";
 
 const UpperNavbar = () => {
   const { themeProvided } = useSelector((storeReceived) => storeReceived.theme);
@@ -46,9 +47,7 @@ const UpperNavbar = () => {
           </button>
           <NavLink
             to="/login"
-            style={({isActive})=>({
-              color:isActive?"var(--primary-color)":""
-            })}
+            style={getActiveLoginStyle}
             className={`miBtn text-cursor-pointer link-none ${styles.login_page_active} `}
           >
             LOGIN
