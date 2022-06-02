@@ -72,3 +72,7 @@
     display: none;
   }
 }
+
+.login_page_active:hover {
+  color: var(--primary-color);
+}

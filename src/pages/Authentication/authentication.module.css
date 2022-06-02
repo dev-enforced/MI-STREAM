@@ -1,0 +1,110 @@
+.main_container {
+  height: 70vh;
+}
+
+.auth_wrapper {
+  background-color: var(--bg-clr-choice);
+  width: 100%;
+  height: 100%;
+}
+
+.form_container {
+  width: 480px;
+}
+
+.form_heading_text {
+  font-family: "Catamaran", sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.2em;
+  margin-bottom: 1em;
+}
+
+.auth_form {
+  width: 100%;
+  padding: 1em 2.4em;
+  border-radius: var(--border-rd-md);
+  background-color: var(--bg-clr-choice);
+  border: 1px solid transparent;
+  /* border needs a color which can be searched on later
+  Reminder for Roshan to add it */
+}
+
+.auth_form > * {
+  margin: 0.5em 0;
+}
+
+.form_input_container {
+  margin: 0.2rem;
+}
+
+.form_input_label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-clr-choice);
+}
+
+.form_input_label::before {
+  content: "*";
+  padding-right: 0.1em;
+  color: var(--primary-color);
+}
+
+.auth_input {
+  width: 100%;
+  padding: 0.25em 0.5em;
+  margin: 0.5rem 0 0.2rem;
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  outline: transparent;
+  background-color: var(--bg-clr-choice);
+  color: var(--text-clr-choice);
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  transition: border 0.28s ease-in-out;
+}
+
+.form_submit_btn {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 500;
+  vertical-align: middle;
+  gap: 0.5rem 0.75rem;
+  min-width: 80px;
+  cursor: pointer;
+  border-radius: var(--border-rd-sm);
+  background-color: var(--text-clr-choice);
+  color: var(--bg-clr-choice);
+  border: 2px solid var(--text-clr-choice);
+  width: max-content;
+  width: -webkit-max-content;
+  height: max-content;
+  height: -webkit-max-content;
+}
+
+.form_submit_btn:hover {
+  background-color: var(--primary-color);
+}
+
+.auth_form .form_submit_btn {
+  width: unset;
+}
+
+.form_actions {
+  width: 100%;
+  text-align: center;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: 0.8rem;
+  border: 1px solid transparent;
+  border-radius: var(--border-rd-md);
+  background-color: var(--bg-clr-choice);
+}
+
+.alternate_action {
+  color: var(--primary-color);
+  font-weight: 600;
+}

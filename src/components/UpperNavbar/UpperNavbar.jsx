@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { NavVideoSearch } from "components";
 import { updateSidebarView, updateTheme } from "reduxFiles";
@@ -15,7 +15,7 @@ const UpperNavbar = () => {
     dispatch(updateSidebarView());
   };
   const { pathname } = useLocation();
-  const notAllowedSections = ["/"];
+  const notAllowedSections = ["/", "/login", "/signup"];
   return (
     <header className={`p-2 ${styles.miHeader}`}>
       <nav className={`p-2 g-flex-row g-flex-space-between-align-center`}>
@@ -27,13 +27,13 @@ const UpperNavbar = () => {
             <i className="fas fa-bars"></i>
           </button>
         )}
-        <Link className="link-none" to="/">
+        <NavLink className="link-none" to="/">
           <button
             className={`${styles.miBrand} fw-600 pos-relative text-cursor-pointer`}
           >
             MI STREAM
           </button>
-        </Link>
+        </NavLink>
         <div className={`${styles.searchDesktop}`}>
           <NavVideoSearch />
         </div>
@@ -44,7 +44,16 @@ const UpperNavbar = () => {
               {themeProvided ? "dark_mode" : "light_mode"}
             </span>
           </button>
-          <button className={`miBtn text-cursor-pointer`}>LOGIN</button>
+          <NavLink
+            to="/login"
+            style={({isActive})=>({
+              color:isActive?"var(--primary-color)":""
+            })}
+            className={`miBtn text-cursor-pointer link-none ${styles.login_page_active} `}
+          >
+            LOGIN
+          </NavLink>
+          {/* <button className={`miBtn text-cursor-pointer`}>LOGIN</button> */}
         </div>
       </nav>
       <div className={`${styles.searchForMobile}`}>

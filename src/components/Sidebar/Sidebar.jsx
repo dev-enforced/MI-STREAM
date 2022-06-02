@@ -9,7 +9,7 @@ const Sidebar = () => {
   const { sidebarView } = useSelector((storeReceived) => storeReceived.sidebar);
   const viewDimensions = useViewDimensions();
   const { pathname } = useLocation();
-  const notAllowedSections = ["/"];
+  const notAllowedSections = ["/", "/login", "/signup"];
   return (
     !notAllowedSections.includes(pathname) &&
     (sidebarView ? (

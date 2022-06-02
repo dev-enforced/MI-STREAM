@@ -10,6 +10,7 @@ const SidebarMaximized = () => {
   const toggleSidebarView = () => {
     dispatch(updateSidebarView());
   };
+
   return (
     <div className={`${styles.sidebarLinksContainer} g-flex-column`}>
       <button
@@ -24,7 +25,11 @@ const SidebarMaximized = () => {
             onClick={toggleSidebarView}
             key={title + iconName}
             to={redirect}
-            className={`link-none ${styles.sidebarLink} g-flex-row g-flex-align-center`}
+            style={({ isActive }) => ({
+              backgroundColor: isActive ? "var(--icon-hover-clr-bg)" : "",
+              color: isActive ? "var(--primary-color)" : "",
+            })}
+            className={`link-none ${styles.sidebarLink} g-flex-row g-flex-align-center `}
           >
             <span className={`fs-2 material-icons-outlined`}>{iconName}</span>
             <span className="fs-1-5 fw-500">{title}</span>
