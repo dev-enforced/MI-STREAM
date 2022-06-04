@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { authenticationLoginThunk } from "reduxFiles";
 import styles from "./authentication.module.css";
 import { initialLoginData, guestLoginCredentials } from "constants";
+import { useAlerts } from "hooks";
 
 const Login = () => {
   const { isUserLoggedIn } = useSelector(
     (storeReceived) => storeReceived.authenticationStore
   );
+  const { showAlerts } = useAlerts();
   const [loginCredentials, setLoginCredentials] = useState(initialLoginData);
   const { email: emailInput, password: passwordInput } = loginCredentials;
   const dispatch = useDispatch();
@@ -32,11 +34,11 @@ const Login = () => {
         throw new Error(submissionResponse?.error);
       }
       if (gatheredEncodedToken) {
+        showAlerts("success", "Logged in successfully");
         navigate(from, { replace: true });
-        console.log("Logged in successfully");
       }
     } catch (submissionError) {
-      console.error(`Login failed:${submissionError}`);
+      showAlerts("error",`Login failed`);
     }
   };
 

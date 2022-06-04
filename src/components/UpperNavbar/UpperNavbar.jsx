@@ -5,12 +5,14 @@ import { NavVideoSearch } from "components";
 import { logoutService, updateSidebarView, updateTheme } from "reduxFiles";
 import styles from "./UpperNavbar.module.css";
 import { getActiveLoginStyle } from "utilities";
+import { useAlerts } from "hooks";
 
 const UpperNavbar = () => {
   const { themeProvided } = useSelector((storeReceived) => storeReceived.theme);
   const { isUserLoggedIn } = useSelector(
     (storeReceived) => storeReceived.authenticationStore
   );
+  const { showAlerts } = useAlerts();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const toggleTheme = () => {
@@ -19,6 +21,7 @@ const UpperNavbar = () => {
   const logoutActionProvided = () => {
     dispatch(logoutService());
     navigate("/");
+    showAlerts("info", "Logged Out Successfully");
   };
   const toggleSidebarView = () => {
     dispatch(updateSidebarView());

@@ -1,14 +1,16 @@
 import { initialSignupData } from "constants";
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authenticationSignupThunk } from "reduxFiles";
 import styles from "./authentication.module.css";
+import { useAlerts } from "hooks";
 const Signup = () => {
   const { isUserLoggedIn } = useSelector(
     (storeReceived) => storeReceived.authenticationStore
   );
   const dispatch = useDispatch();
+  const { showAlerts } = useAlerts();
   const [signupCredentials, setSignupCredentials] = useState(initialSignupData);
   const {
     firstName: inputFirstName,
@@ -36,18 +38,19 @@ const Signup = () => {
         throw new Error(submissionResponse?.error);
       }
       if (gatheredEncodedToken) {
+        showAlerts("success", "Signed in successfully");
         navigate(from, { replace: true });
-        console.log("Signed in successfully");
       }
     } catch (submissionError) {
-      console.error(`Signup failed:${submissionError}`);
+      showAlerts("error", "Signup failed");
     }
   };
-    useEffect(() => {
-      if (isUserLoggedIn) {
-        navigate(-1);
-      }
-    }, [isUserLoggedIn, navigate]);
+
+  useEffect(() => {
+    if (isUserLoggedIn) {
+      navigate(-1);
+    }
+  }, [isUserLoggedIn, navigate]);
   return (
     <section className={`${styles.main_container}`}>
       <div className={`${styles.auth_wrapper} g-flex-row g-flex-center`}>
