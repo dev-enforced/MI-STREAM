@@ -1,7 +1,53 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import { initialSignupData } from "constants";
+import React, { useState,useEffect } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
+import { authenticationSignupThunk } from "reduxFiles";
 import styles from "./authentication.module.css";
 const Signup = () => {
+  const { isUserLoggedIn } = useSelector(
+    (storeReceived) => storeReceived.authenticationStore
+  );
+  const dispatch = useDispatch();
+  const [signupCredentials, setSignupCredentials] = useState(initialSignupData);
+  const {
+    firstName: inputFirstName,
+    lastName: inputLastName,
+    email: inputEmail,
+    password: inputPassword,
+  } = signupCredentials;
+  const setDataFromInput = (eventReceived) => {
+    setSignupCredentials((prev) => ({
+      ...prev,
+      [eventReceived.target.name]: eventReceived.target.value,
+    }));
+  };
+  const location = useLocation();
+  const navigate = useNavigate();
+  let from = location.state?.from?.pathname ?? "/explore";
+  const signupFormSubmissionHandler = async (userDetailsReceived) => {
+    try {
+      const submissionResponse = await dispatch(
+        authenticationSignupThunk(userDetailsReceived)
+      );
+      const { encodedToken: gatheredEncodedToken } =
+        submissionResponse?.payload;
+      if (submissionResponse?.error) {
+        throw new Error(submissionResponse?.error);
+      }
+      if (gatheredEncodedToken) {
+        navigate(from, { replace: true });
+        console.log("Signed in successfully");
+      }
+    } catch (submissionError) {
+      console.error(`Signup failed:${submissionError}`);
+    }
+  };
+    useEffect(() => {
+      if (isUserLoggedIn) {
+        navigate(-1);
+      }
+    }, [isUserLoggedIn, navigate]);
   return (
     <section className={`${styles.main_container}`}>
       <div className={`${styles.auth_wrapper} g-flex-row g-flex-center`}>
@@ -9,7 +55,14 @@ const Signup = () => {
           <div className={`text-center`}>
             <p className={`${styles.form_heading_text}`}>SIGN UP</p>
           </div>
-          <form className={`g-flex-column ${styles.auth_form}`}>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              signupFormSubmissionHandler(signupCredentials);
+              setSignupCredentials(initialSignupData);
+            }}
+            className={`g-flex-column ${styles.auth_form}`}
+          >
             <div className={`${styles.form_input_container}`}>
               <label
                 htmlFor="firstNameGiven"
@@ -22,6 +75,10 @@ const Signup = () => {
                 id="firstNameGiven"
                 name="firstName"
                 className={`${styles.auth_input}`}
+                value={inputFirstName}
+                onChange={(e) => {
+                  setDataFromInput(e);
+                }}
                 placeholder="Krish"
               />
             </div>
@@ -37,6 +94,10 @@ const Signup = () => {
                 id="lastNameGiven"
                 name="lastName"
                 className={`${styles.auth_input}`}
+                value={inputLastName}
+                onChange={(e) => {
+                  setDataFromInput(e);
+                }}
                 placeholder="Patel"
               />
             </div>
@@ -51,6 +112,10 @@ const Signup = () => {
                 type="email"
                 id="emailGiven"
                 name="email"
+                value={inputEmail}
+                onChange={(e) => {
+                  setDataFromInput(e);
+                }}
                 className={`${styles.auth_input}`}
                 placeholder="krishpatel@gmail.com"
               />
@@ -67,10 +132,17 @@ const Signup = () => {
                 id="passwordGiven"
                 name="password"
                 className={`${styles.auth_input}`}
+                value={inputPassword}
+                onChange={(e) => {
+                  setDataFromInput(e);
+                }}
                 placeholder="*******"
               />
             </div>
-            <button className={`py-2 px-3 ${styles.form_submit_btn}`}>
+            <button
+              type="submit"
+              className={`py-2 px-3 ${styles.form_submit_btn}`}
+            >
               SIGN UP
             </button>
           </form>

@@ -13,9 +13,6 @@ const CategoryChips = () => {
     >
       <div
         className={`pos-relative`}
-        onClick={() => {
-          dispatch(updateCategorySelected("All"));
-        }}
       >
         <input
           type="radio"
@@ -23,6 +20,9 @@ const CategoryChips = () => {
           id="All"
           className={`${styles.category_input}`}
           checked={categorySelected === "All"}
+          onChange={() => {
+          dispatch(updateCategorySelected("All"));
+        }}
         />
         <label htmlFor="All" className={`${styles.category_label}`}>
           ALL
@@ -33,9 +33,9 @@ const CategoryChips = () => {
           <div
             key={_id}
             className={`pos-relative`}
-            onClick={() => {
-              dispatch(updateCategorySelected(categoryName));
-            }}
+            // onClick={() => {
+            //   dispatch(updateCategorySelected(categoryName));
+            // }}
           >
             <input
               type="radio"
@@ -43,6 +43,9 @@ const CategoryChips = () => {
               id={categoryName}
               className={`${styles.category_input}`}
               checked={categorySelected === categoryName}
+              onChange={(e) => {
+                dispatch(updateCategorySelected(categoryName));
+              }}
             />
             <label
               className={`${styles.category_label}`}

@@ -1,7 +1,51 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { authenticationLoginThunk } from "reduxFiles";
 import styles from "./authentication.module.css";
+import { initialLoginData, guestLoginCredentials } from "constants";
+
 const Login = () => {
+  const { isUserLoggedIn } = useSelector(
+    (storeReceived) => storeReceived.authenticationStore
+  );
+  const [loginCredentials, setLoginCredentials] = useState(initialLoginData);
+  const { email: emailInput, password: passwordInput } = loginCredentials;
+  const dispatch = useDispatch();
+  const setDataFromInput = (eventReceived) => {
+    setLoginCredentials((prev) => ({
+      ...prev,
+      [eventReceived.target.name]: eventReceived.target.value,
+    }));
+  };
+  const location = useLocation();
+  const navigate = useNavigate();
+  let from = location.state?.from?.pathname ?? "/explore";
+  const loginFormSubmissionHandler = async (userDetailsReceived) => {
+    try {
+      const submissionResponse = await dispatch(
+        authenticationLoginThunk(userDetailsReceived)
+      );
+      const { encodedToken: gatheredEncodedToken } =
+        submissionResponse?.payload;
+      if (submissionResponse?.error) {
+        throw new Error(submissionResponse?.error);
+      }
+      if (gatheredEncodedToken) {
+        navigate(from, { replace: true });
+        console.log("Logged in successfully");
+      }
+    } catch (submissionError) {
+      console.error(`Login failed:${submissionError}`);
+    }
+  };
+
+  useEffect(() => {
+    if (isUserLoggedIn) {
+      navigate(-1);
+    }
+  }, [isUserLoggedIn, navigate]);
+
   return (
     <section className={`${styles.main_container}`}>
       <div className={`${styles.auth_wrapper} g-flex-row g-flex-center`}>
@@ -9,7 +53,14 @@ const Login = () => {
           <div className={`text-center`}>
             <p className={`${styles.form_heading_text}`}>LOG IN</p>
           </div>
-          <form className={`g-flex-column ${styles.auth_form}`}>
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+              loginFormSubmissionHandler(loginCredentials);
+              setLoginCredentials(initialLoginData);
+            }}
+            className={`g-flex-column ${styles.auth_form}`}
+          >
             <div className={`${styles.form_input_container}`}>
               <label
                 htmlFor="emailGiven"
@@ -22,6 +73,10 @@ const Login = () => {
                 id="emailGiven"
                 name="email"
                 className={`${styles.auth_input}`}
+                value={emailInput}
+                onChange={(e) => {
+                  setDataFromInput(e);
+                }}
                 placeholder="krishpatel@gmail.com"
               />
             </div>
@@ -37,10 +92,17 @@ const Login = () => {
                 id="passwordGiven"
                 name="password"
                 className={`${styles.auth_input}`}
+                value={passwordInput}
+                onChange={(e) => {
+                  setDataFromInput(e);
+                }}
                 placeholder="*******"
               />
             </div>
-            <button className={`py-2 px-3 ${styles.form_submit_btn}`}>
+            <button
+              type="submit"
+              className={`py-2 px-3 ${styles.form_submit_btn}`}
+            >
               LOG IN
             </button>
           </form>
@@ -48,7 +110,12 @@ const Login = () => {
             className={`${styles.form_actions} g-flex-column gentle-flex-gap g-flex-align-center`}
           >
             <p>
-              <button className={`py-2 px-3 ${styles.form_submit_btn}`}>
+              <button
+                onClick={() => {
+                  loginFormSubmissionHandler(guestLoginCredentials);
+                }}
+                className={`py-2 px-3 ${styles.form_submit_btn}`}
+              >
                 GUEST LOGIN
               </button>
             </p>

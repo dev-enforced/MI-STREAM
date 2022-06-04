@@ -5,3 +5,8 @@ export {
   updateCategorySelected,
 } from "./categories/categoriesSlice";
 export { getVideos } from "./videos/videosSlice";
+export {
+  authenticationLoginThunk,
+  authenticationSignupThunk,
+  logoutService
+} from "./authentication/authenticationSlice";
