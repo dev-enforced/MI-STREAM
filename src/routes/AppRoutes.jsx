@@ -1,6 +1,15 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { APITester, Mockbee, Homepage, ExplorePage } from "pages";
+import {
+  APITester,
+  Mockbee,
+  Homepage,
+  ExplorePage,
+  Login,
+  Signup,
+} from "pages";
+import { ProtectedRoutes } from "./ProtectedRoutes";
+
 const AppRoutes = () => {
   return (
     <Routes>
@@ -8,6 +17,16 @@ const AppRoutes = () => {
       <Route path="/explore" element={<ExplorePage />} />
       <Route path="/mockman" element={<APITester />} />
       <Route path="/mockbee" element={<Mockbee />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route
+        path="/likedvideos"
+        element={
+          <ProtectedRoutes
+            protectedChildren={<ExplorePage />}
+          ></ProtectedRoutes>
+        }
+      />
     </Routes>
   );
 };

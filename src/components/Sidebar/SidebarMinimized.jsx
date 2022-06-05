@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { sidebarLinks } from "constants";
 import { updateSidebarView } from "reduxFiles";
 import styles from "./Sidebar.module.css";
+import { getActiveSideLinkStyle } from "utilities";
 const SidebarMinimized = () => {
   const dispatch = useDispatch();
   const toggleSidebarView = () => {
@@ -17,6 +18,7 @@ const SidebarMinimized = () => {
             onClick={toggleSidebarView}
             key={title + iconName}
             to={redirect}
+            style={getActiveSideLinkStyle}
             className={`link-none ${styles.sidebarWithIconsIndividualLink} g-flex-row g-flex-align-center`}
           >
             <span className={`fs-2 material-icons-outlined`}>{iconName}</span>

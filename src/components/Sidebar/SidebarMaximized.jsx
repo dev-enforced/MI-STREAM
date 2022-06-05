@@ -4,12 +4,14 @@ import { useDispatch } from "react-redux";
 import { sidebarLinks } from "constants";
 import { updateSidebarView } from "reduxFiles";
 import styles from "./Sidebar.module.css";
+import { getActiveSideLinkStyle } from "utilities";
 
 const SidebarMaximized = () => {
   const dispatch = useDispatch();
   const toggleSidebarView = () => {
     dispatch(updateSidebarView());
   };
+
   return (
     <div className={`${styles.sidebarLinksContainer} g-flex-column`}>
       <button
@@ -24,7 +26,8 @@ const SidebarMaximized = () => {
             onClick={toggleSidebarView}
             key={title + iconName}
             to={redirect}
-            className={`link-none ${styles.sidebarLink} g-flex-row g-flex-align-center`}
+            style={getActiveSideLinkStyle}
+            className={`link-none ${styles.sidebarLink} g-flex-row g-flex-align-center `}
           >
             <span className={`fs-2 material-icons-outlined`}>{iconName}</span>
             <span className="fs-1-5 fw-500">{title}</span>
