@@ -12,7 +12,6 @@ const authenticationSignupFunction = async (userDetails) => {
     const { data: dataReceived, status } = signupResponse;
     if (status === 201) {
       localStorage.setItem("encodedTokenReceived", dataReceived.encodedToken);
-      localStorage.getItem("encodedTokenReceived");
       return dataReceived;
     }
   } catch (signupErrorReceived) {
@@ -27,7 +26,6 @@ const authenticationLoginFunction = async (userDetails) => {
     const { data: dataReceived, status } = loginResponse;
     if (status === 200) {
       localStorage.setItem("encodedTokenReceived", dataReceived.encodedToken);
-      localStorage.getItem("encodedTokenReceived");
       return dataReceived;
     }
   } catch (loginErrorReceived) {
