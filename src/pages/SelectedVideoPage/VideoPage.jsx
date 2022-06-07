@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
 import styles from "./VideoPage.module.css";
+import { VideoSuggestionCard } from "components";
+import { videoShufflerFunction } from "utilities";
 
 const VideoPage = () => {
   const { videoId } = useParams();
@@ -40,10 +42,10 @@ const VideoPage = () => {
       >
         <div className={`${styles.selected_video_player}`}>
           <ReactPlayer
-            height="100%"
             width="100%"
-            controls
+            height="100%"
             url={`https://youtube.com/watch?v=${videoId}`}
+            controls
           />
         </div>
         <div className={`${styles.selected_video_contents} g-flex-column`}>
@@ -102,7 +104,16 @@ const VideoPage = () => {
         </div>
       </div>
 
-      <div>{/* More videos for suggestions */}</div>
+      <div className={`g-flex-column ${styles.video_suggestions}`}>
+        {videoShufflerFunction(videosList).slice(0,6).map((everyVideo) => {
+          return (
+            <VideoSuggestionCard
+              key={everyVideo._id}
+              videoReceived={everyVideo}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

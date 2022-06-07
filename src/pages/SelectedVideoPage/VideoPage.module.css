@@ -65,6 +65,11 @@
   width: 50rem;
 }
 
+.video_suggestions {
+  flex-basis: 30%;
+  gap: 1rem;
+}
+
 @media only screen and (max-width: 1250px) {
   .video_page_container {
     flex-direction: column;

@@ -11,3 +11,4 @@ export { VideoCard } from "./VideoCard/VideoCard";
 export { VideoMenuOptions } from "./VideoMenuOptions/VideoMenuOptions";
 export { Alerts } from "./Alerts/Alerts";
 export { ScrollToTop } from "./ScrollToTop/ScrollToTop";
+export { VideoSuggestionCard } from "./VideoSuggestionCard/VideoSuggestionCard";
