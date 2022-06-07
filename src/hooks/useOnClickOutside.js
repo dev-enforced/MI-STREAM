@@ -16,7 +16,7 @@ const useOnClickOutside = (eventHandler, referenceGiven) => {
     return () => {
       document.removeEventListener("touchstart", listenerHandler);
       document.removeEventListener("mousedown", listenerHandler);
-      document.addEventListener("mouseleave", listenerHandler);
+      document.removeEventListener("mouseleave", listenerHandler);
     };
   }, [eventHandler, referenceGiven]);
 };
