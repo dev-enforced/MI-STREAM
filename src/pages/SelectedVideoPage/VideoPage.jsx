@@ -105,14 +105,20 @@ const VideoPage = () => {
       </div>
 
       <div className={`g-flex-column ${styles.video_suggestions}`}>
-        {videoShufflerFunction(videosList).slice(0,6).map((everyVideo) => {
-          return (
-            <VideoSuggestionCard
-              key={everyVideo._id}
-              videoReceived={everyVideo}
-            />
-          );
-        })}
+        {videoShufflerFunction(videosList)
+          .slice(0, 6)
+          .map((everyVideo) => {
+            if (everyVideo._id !== videoId) {
+              return (
+                <VideoSuggestionCard
+                  key={everyVideo._id}
+                  videoReceived={everyVideo}
+                />
+              );
+            } else {
+              return null;
+            }
+          })}
       </div>
     </div>
   );
