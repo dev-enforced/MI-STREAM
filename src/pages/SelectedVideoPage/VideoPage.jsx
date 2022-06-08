@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
 import styles from "./VideoPage.module.css";
 import { VideoSuggestionCard } from "components";
-import { videoShufflerFunction } from "utilities";
+import { getVideoUrl, videoShufflerFunction } from "utilities";
 
 const VideoPage = () => {
   const { videoId } = useParams();
@@ -44,7 +44,7 @@ const VideoPage = () => {
           <ReactPlayer
             width="100%"
             height="100%"
-            url={`https://youtube.com/watch?v=${videoId}`}
+            url={`${getVideoUrl(videoId)}`}
             controls
           />
         </div>
