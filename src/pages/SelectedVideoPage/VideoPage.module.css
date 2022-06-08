@@ -1,0 +1,85 @@
+.video_page_container {
+  margin: 1rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.selected_video_section {
+  gap: 1rem;
+  flex-grow: 1;
+  align-self: flex-start;
+}
+
+.selected_video_player {
+  aspect-ratio: 16/9;
+}
+
+.selected_video_contents {
+  gap: 0.5rem;
+}
+
+.selected_video_contents_title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  font-family: "Catamaran", sans-serif;
+}
+
+.selected_videos_sub_content {
+  font-size: 0.875rem;
+  color: var(--text-clr-choice);
+  gap: 0.5rem;
+}
+
+.selected_video_contents_separator {
+  font-size: 8px;
+}
+
+.selected_video_actions {
+  margin-left: auto;
+}
+
+.selected_video_action_btn {
+  aspect-ratio: 1/1;
+  padding: 0.75rem;
+  border-radius: var(--border-rd-circle);
+  border: transparent;
+  outline: transparent;
+  background: transparent;
+  color: inherit;
+}
+
+.selected_video_action_btn:hover {
+  background-color: var(--icon-hover-clr-bg);
+}
+
+.selected_video_action_icon {
+  font-size: 1.75rem;
+}
+
+.selected_video_line {
+  height: 1px;
+  background-color: var(--primary-color);
+}
+
+.selected_video_description {
+  width: 50rem;
+}
+
+.video_suggestions {
+  flex-basis: 30%;
+  gap: 1rem;
+}
+
+@media only screen and (max-width: 1250px) {
+  .video_page_container {
+    flex-direction: column;
+  }
+
+  .selected_video_section {
+    align-self: stretch;
+  }
+
+  .selected_video_description {
+    width: 100%;
+  }
+}

@@ -7,6 +7,7 @@ import {
   ExplorePage,
   Login,
   Signup,
+  VideoPage,
 } from "pages";
 import { ProtectedRoutes } from "./ProtectedRoutes";
 
@@ -15,6 +16,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/explore" element={<ExplorePage />} />
+      <Route path="/explore/:videoId" element={<VideoPage />} />
       <Route path="/mockman" element={<APITester />} />
       <Route path="/mockbee" element={<Mockbee />} />
       <Route path="/login" element={<Login />} />

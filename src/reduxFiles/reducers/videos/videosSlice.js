@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { receiveAllVideos } from "services";
 const initialState = {
   status: null,
-  videosList: [],
+  videosList: JSON.parse(localStorage.getItem("videosList"))??[],
 };
 const getVideosService = async () => {
   try {
@@ -29,6 +29,7 @@ const videosSlice = createSlice({
     [getVideos.fulfilled]: (state, action) => {
       state.status = "fulfilled";
       state.videosList = action.payload;
+      localStorage.setItem("videosList",JSON.stringify(action.payload))
     },
     [getVideos.failed]: (state, action) => {
       state.status = "failed";

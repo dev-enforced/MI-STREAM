@@ -1,0 +1,53 @@
+.video_suggestion_card_container {
+  gap: 0.5rem;
+}
+
+.video_suggestion_img {
+  width: 40%;
+}
+
+.video_suggestion_card_contents {
+  gap: 0.25rem;
+}
+
+.video_suggestion_card_title {
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.video_suggestion_card_more_options {
+  display: flex;
+  visibility: hidden;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--border-rd-circle);
+  aspect-ratio: 1/1;
+}
+
+.video_suggestion_card_container:hover .video_suggestion_card_more_options {
+  visibility: visible;
+}
+
+.video_suggestion_card_more_options:hover {
+  background-color: var(--icon-hover-clr-bg);
+}
+
+.video_suggestion_card_more_details {
+  font-size: 0.875rem;
+  gap: 0.5rem;
+  color: var(--primary-color);
+}
+
+.video_suggestion_card_separator {
+  font-size: 8px;
+}
+
+@media screen and (max-width: 800px) {
+  .video_suggestion_card_more_options {
+    visibility: visible;
+  }
+}
