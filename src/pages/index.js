@@ -4,3 +4,5 @@ export { Homepage } from "./Homepage/Homepage";
 export { ExplorePage } from "./ExplorePage/ExplorePage";
 export { Login, Signup } from "./Authentication";
 export { VideoPage } from "./SelectedVideoPage/VideoPage";
+export { EmptyPage } from "./EmptyPage/EmptyPage";
+export { LikesPage } from "./LikesPage/LikesPage";

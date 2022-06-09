@@ -14,7 +14,7 @@ const receiveAllLikedVideosHandler = async (tokenProvided) => {
     const {
       data: { likes: likedVideosListReceived },
     } = await receiveAllLikedVideosService(tokenProvided);
-    console.log(likedVideosListReceived);
+
     return likedVideosListReceived;
   } catch (getLikedVideosError) {
     console.error(
@@ -24,12 +24,14 @@ const receiveAllLikedVideosHandler = async (tokenProvided) => {
   }
 };
 
-const addNewVideoToLikesHandler = async (videoDetailsGiven, tokenProvided) => {
+const addNewVideoToLikesHandler = async ({
+  videoDetailsGiven,
+  tokenProvided,
+}) => {
   try {
     const {
       data: { likes: likedVideosListReceived },
     } = await addVideoToLikedService(videoDetailsGiven, tokenProvided);
-    console.log(likedVideosListReceived);
     return likedVideosListReceived;
   } catch (addNewVideoToLikesError) {
     console.error(
@@ -39,15 +41,14 @@ const addNewVideoToLikesHandler = async (videoDetailsGiven, tokenProvided) => {
   }
 };
 
-const removeExistingVideoFromLikesHandler = async (
+const removeExistingVideoFromLikesHandler = async ({
   videoDetailsGiven,
-  tokenProvided
-) => {
+  tokenProvided,
+}) => {
   try {
     const {
       data: { likes: likedVideosListReceived },
     } = await removeVideoFromLikedService(videoDetailsGiven, tokenProvided);
-    console.log(likedVideosListReceived);
     return likedVideosListReceived;
   } catch (removeExistingVideoFromLikesError) {
     console.error(
@@ -77,21 +78,23 @@ const likesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(receiveAllLikedVideos.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.status = "fulfilled";
         state.likedVideosList = action.payload;
       })
       .addCase(addNewVideoToLikes.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.status = "fulfilled";
         state.likedVideosList = action.payload;
       })
       .addCase(removeExistingVideoFromLikes.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.status = "fulfilled";
         state.likedVideosList = action.payload;
       });
   },
 });
 
+export {
+  receiveAllLikedVideos,
+  addNewVideoToLikes,
+  removeExistingVideoFromLikes,
+};
 export default likesSlice.reducer;

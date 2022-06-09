@@ -1,24 +1,70 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
 import styles from "./VideoPage.module.css";
 import { VideoSuggestionCard } from "components";
 import { getVideoUrl, videoShufflerFunction } from "utilities";
+import { addNewVideoToLikes, removeExistingVideoFromLikes } from "reduxFiles";
+import { useAlerts } from "hooks";
 
 const VideoPage = () => {
   const { videoId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const videoPageRef = useRef();
+  const location = useLocation();
+  const { showAlerts } = useAlerts();
+  const [videoPageDimensions, setVideoPageDimensions] = useState();
   const { videosList } = useSelector((storeReceived) => storeReceived.videos);
   const { sidebarView } = useSelector((storeReceived) => storeReceived.sidebar);
+  const { isUserLoggedIn, encodedTokenReceived } = useSelector(
+    (storeReceived) => storeReceived.authenticationStore
+  );
+  const { likedVideosList } = useSelector(
+    (storeReceived) => storeReceived.likesStore
+  );
   const videoSelected = videosList.find(
     (everyVideo) => everyVideo._id === videoId
   );
   const { title, dateOfUpload, viewQuantity, description } = videoSelected;
-  const videoPageRef = useRef();
-  const [videoPageDimensions, setVideoPageDimensions] = useState();
+
   const getCurrentPageDimensions = () => {
     const widthReceived = videoPageRef.current.clientWidth;
     setVideoPageDimensions(widthReceived);
+  };
+
+  const checkVideoPresentInLikes = (selectedVideoDetails) =>
+    likedVideosList.some(
+      (everyVideo) => everyVideo._id === selectedVideoDetails._id
+    );
+  const addVideoToLikeEvent = (selectedVideoDetails) => {
+    if (!isUserLoggedIn) {
+      navigate("/login", { state: { from: location } });
+      showAlerts("error", "Please Login TO Continue");
+    } else {
+      dispatch(
+        addNewVideoToLikes({
+          videoDetailsGiven: selectedVideoDetails,
+          tokenProvided: encodedTokenReceived,
+        })
+      );
+      showAlerts("success", "Added To Likes");
+    }
+  };
+  const removeVideoFromLikeEvent = (selectedVideoDetails) => {
+    if (!isUserLoggedIn) {
+      navigate("/login");
+      showAlerts("error", "Please Login TO Continue");
+    } else {
+      dispatch(
+        removeExistingVideoFromLikes({
+          videoDetailsGiven: selectedVideoDetails,
+          tokenProvided: encodedTokenReceived,
+        })
+      );
+      showAlerts("success", "Removed From Likes");
+    }
   };
   //   For receiving the page width whenever the window is resized and setting it
   useEffect(() => {
@@ -65,16 +111,36 @@ const VideoPage = () => {
             <div
               className={`g-flex-row g-flex-center ${styles.selected_video_actions}`}
             >
-              <button
-                className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
-              >
-                <span
-                  className={`material-icons-outlined ${styles.selected_video_action_icon}`}
-                  title="Like this video"
+              {checkVideoPresentInLikes(videoSelected) && isUserLoggedIn ? (
+                <button
+                  className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
+                  onClick={() => {
+                    removeVideoFromLikeEvent(videoSelected);
+                  }}
                 >
-                  thumb_up
-                </span>
-              </button>
+                  <span
+                    className={`material-icons ${styles.selected_video_action_icon}`}
+                    title="Remove this video from likes"
+                  >
+                    thumb_up
+                  </span>
+                </button>
+              ) : (
+                <button
+                  className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
+                  onClick={() => {
+                    addVideoToLikeEvent(videoSelected);
+                  }}
+                >
+                  <span
+                    className={`material-icons-outlined ${styles.selected_video_action_icon}`}
+                    title="Like this video"
+                  >
+                    thumb_up
+                  </span>
+                </button>
+              )}
+
               <button
                 className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
               >

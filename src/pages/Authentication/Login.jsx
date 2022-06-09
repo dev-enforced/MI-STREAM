@@ -38,7 +38,7 @@ const Login = () => {
         navigate(from, { replace: true });
       }
     } catch (submissionError) {
-      showAlerts("error",`Login failed`);
+      showAlerts("error", `Login failed`);
     }
   };
 

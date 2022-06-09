@@ -8,5 +8,10 @@ export { getVideos } from "./videos/videosSlice";
 export {
   authenticationLoginThunk,
   authenticationSignupThunk,
-  logoutService
+  logoutService,
 } from "./authentication/authenticationSlice";
+export {
+  receiveAllLikedVideos,
+  addNewVideoToLikes,
+  removeExistingVideoFromLikes,
+} from "./likes/likesSlice";

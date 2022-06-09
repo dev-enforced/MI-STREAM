@@ -8,6 +8,7 @@ import {
   Login,
   Signup,
   VideoPage,
+  LikesPage,
 } from "pages";
 import { ProtectedRoutes } from "./ProtectedRoutes";
 
@@ -24,9 +25,7 @@ const AppRoutes = () => {
       <Route
         path="/likedvideos"
         element={
-          <ProtectedRoutes
-            protectedChildren={<ExplorePage />}
-          ></ProtectedRoutes>
+          <ProtectedRoutes protectedChildren={<LikesPage />}></ProtectedRoutes>
         }
       />
     </Routes>

@@ -1,0 +1,34 @@
+.empty_collection_container {
+  margin: 1rem;
+}
+
+.empty_collection_contents {
+  gap: 1rem;
+}
+
+.empty_collection_content_title {
+  font-size: 1.875rem;
+  font-family: "Catamaran", sans-serif;
+}
+
+.empty_collection_content_image {
+  max-width: 100%;
+  width: 25rem;
+}
+
+.explore_more_btn {
+  background-color: var(--primary-color);
+  color: var(--text-clr-choice);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  font-weight: 700;
+  max-width: 10rem;
+  border-radius: var(--border-rd-sm);
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 480px) {
+  .empty_collection_container {
+    margin-top: 5rem;
+  }
+}
