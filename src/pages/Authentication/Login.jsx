@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticationLoginThunk } from "reduxFiles";
-import styles from "./authentication.module.css";
 import { initialLoginData, guestLoginCredentials } from "constants";
 import { useAlerts } from "hooks";
+import styles from "./authentication.module.css";
 
 const Login = () => {
   const { isUserLoggedIn } = useSelector(
@@ -38,7 +38,7 @@ const Login = () => {
         navigate(from, { replace: true });
       }
     } catch (submissionError) {
-      showAlerts("error",`Login failed`);
+      showAlerts("error", `Login failed`);
     }
   };
 

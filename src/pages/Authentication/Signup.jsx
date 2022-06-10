@@ -1,10 +1,10 @@
-import { initialSignupData } from "constants";
 import React, { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { authenticationSignupThunk } from "reduxFiles";
-import styles from "./authentication.module.css";
+import { initialSignupData } from "constants";
 import { useAlerts } from "hooks";
+import styles from "./authentication.module.css";
 const Signup = () => {
   const { isUserLoggedIn } = useSelector(
     (storeReceived) => storeReceived.authenticationStore

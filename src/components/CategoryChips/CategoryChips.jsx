@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styles from "./CategoryChips.module.css";
 import { updateCategorySelected } from "reduxFiles";
+import styles from "./CategoryChips.module.css";
 const CategoryChips = () => {
   const dispatch = useDispatch();
   const { categoriesList, categorySelected } = useSelector(
@@ -11,9 +11,7 @@ const CategoryChips = () => {
     <div
       className={`gentle-flex-gap g-flex-align-center ${styles.categories_wrapper}`}
     >
-      <div
-        className={`pos-relative`}
-      >
+      <div className={`pos-relative`}>
         <input
           type="radio"
           name="category-choice"
@@ -21,8 +19,8 @@ const CategoryChips = () => {
           className={`${styles.category_input}`}
           checked={categorySelected === "All"}
           onChange={() => {
-          dispatch(updateCategorySelected("All"));
-        }}
+            dispatch(updateCategorySelected("All"));
+          }}
         />
         <label htmlFor="All" className={`${styles.category_label}`}>
           ALL

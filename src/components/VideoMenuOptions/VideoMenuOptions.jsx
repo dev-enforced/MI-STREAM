@@ -1,21 +1,66 @@
 import React, { useRef } from "react";
 import { useOnClickOutside } from "hooks";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { addNewVideoToLikes, removeExistingVideoFromLikes } from "reduxFiles";
+import { useAlerts } from "hooks";
 import styles from "./VideoMenuOptions.module.css";
 
 const VideoMenuOptions = (props) => {
-  const { isUserLoggedIn } = useSelector(
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { showAlerts } = useAlerts();
+  const menuOptionsRef = useRef();
+  const { selectedVideo, videoMenuOptionsView, setVideoMenuOptionsView } =
+    props;
+  const { isUserLoggedIn, encodedTokenReceived } = useSelector(
     (storeReceived) => storeReceived.authenticationStore
   );
-  // selectedVideo [using it in the props later]
-  const { videoMenuOptionsView, setVideoMenuOptionsView } = props;
+  const { likedVideosList } = useSelector(
+    (storeReceived) => storeReceived.likesStore
+  );
+  const checkVideoPresentInLikes = (selectedVideoDetails) =>
+    likedVideosList.some(
+      (everyVideo) => everyVideo._id === selectedVideoDetails._id
+    );
+  const addVideoToLikeEvent = (selectedVideoDetails) => {
+    if (!isUserLoggedIn) {
+      navigate("/login", { state: { from: location } });
+      showAlerts("error", "Please Login TO Continue");
+    } else {
+      dispatch(
+        addNewVideoToLikes({
+          videoDetailsGiven: selectedVideoDetails,
+          tokenProvided: encodedTokenReceived,
+        })
+      );
+      showAlerts("success", "Added To Likes");
+    }
+  };
+  const removeVideoFromLikeEvent = (selectedVideoDetails) => {
+    if (!isUserLoggedIn) {
+      navigate("/login");
+      showAlerts("error", "Please Login TO Continue");
+    } else {
+      dispatch(
+        removeExistingVideoFromLikes({
+          videoDetailsGiven: selectedVideoDetails,
+          tokenProvided: encodedTokenReceived,
+        })
+      );
+      showAlerts("success", "Removed From Likes");
+    }
+  };
+  //  [using it in the props later]
+
   const toggleMenuOptionsView = (event) => {
     event.stopPropagation();
     setVideoMenuOptionsView(
       (previousVideoMenuOptionsView) => !previousVideoMenuOptionsView
     );
   };
-  const menuOptionsRef = useRef();
+
   useOnClickOutside(() => setVideoMenuOptionsView(false), menuOptionsRef);
   return (
     <>
@@ -36,12 +81,29 @@ const VideoMenuOptions = (props) => {
                   <span className="material-icons-outlined">watch_later</span>
                   REMOVE FROM WATCH LATER
                 </li>
-                <li
-                  className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
-                >
-                  <span className="material-icons-outlined">thumb_up</span>
-                  ADD TO LIKED VIDEOS
-                </li>
+                {checkVideoPresentInLikes(selectedVideo) && isUserLoggedIn ? (
+                  <li
+                    className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
+                    onClick={(clickEvent) => {
+                      clickEvent.stopPropagation();
+                      removeVideoFromLikeEvent(selectedVideo);
+                    }}
+                  >
+                    <span className="material-icons">thumb_up</span>
+                    REMOVE FROM LIKED VIDEOS
+                  </li>
+                ) : (
+                  <li
+                    className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
+                    onClick={(clickEvent) => {
+                      clickEvent.stopPropagation();
+                      addVideoToLikeEvent(selectedVideo);
+                    }}
+                  >
+                    <span className="material-icons-outlined">thumb_up</span>
+                    ADD TO LIKED VIDEOS
+                  </li>
+                )}
               </ul>
             </div>
           ) : null}

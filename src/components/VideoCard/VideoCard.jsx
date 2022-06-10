@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import styles from "./VideoCard.module.css";
 import { getVideoImg, viewCountFormatter } from "utilities";
 import { VideoMenuOptions } from "components";
 import { useNavigate } from "react-router-dom";
+import styles from "./VideoCard.module.css";
 const VideoCard = ({ videoDetails }) => {
   const navigate = useNavigate();
   const { _id, title, viewQuantity, dateOfUpload } = videoDetails;

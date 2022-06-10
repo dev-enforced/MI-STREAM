@@ -3,9 +3,9 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { NavVideoSearch } from "components";
 import { logoutService, updateSidebarView, updateTheme } from "reduxFiles";
-import styles from "./UpperNavbar.module.css";
 import { getActiveLoginStyle } from "utilities";
 import { useAlerts } from "hooks";
+import styles from "./UpperNavbar.module.css";
 
 const UpperNavbar = () => {
   const { themeProvided } = useSelector((storeReceived) => storeReceived.theme);
