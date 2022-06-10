@@ -14,7 +14,11 @@ const CollectionCard = ({ videoDetails }) => {
         navigate(`/explore/${_id}`);
       }}
     >
-      <img src={getVideoImg(_id)} alt={title} className={`${styles}`} />
+      <img
+        src={getVideoImg(_id)}
+        alt={title}
+        className={`${styles.collection_card_container_img}`}
+      />
       <div
         className={`g-flex-column ${styles.collection_card_container_contents}`}
       >
