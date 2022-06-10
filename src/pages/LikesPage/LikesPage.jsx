@@ -47,13 +47,14 @@ const LikesPage = () => {
           </div>
           <div className={`g-flex-column ${styles.like_page_video_list}`}>
             {/* Liked videos list will come here */}
-            {
-              likedVideosList.map((everyVideo)=>{
-                return (
-                  <CollectionCard key={everyVideo._id} videoDetails={everyVideo}/>
-                )
-              })
-            }
+            {likedVideosList.map((everyVideo) => {
+              return (
+                <CollectionCard
+                  key={everyVideo._id}
+                  videoDetails={everyVideo}
+                />
+              );
+            })}
           </div>
         </div>
       )}
