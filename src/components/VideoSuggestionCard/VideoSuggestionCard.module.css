@@ -46,8 +46,20 @@
   font-size: 8px;
 }
 
+.video_suggestion_card_options_container {
+  visibility: hidden;
+}
+
+.video_suggestion_card_container:hover
+  .video_suggestion_card_options_container {
+  visibility: visible;
+}
+
 @media screen and (max-width: 800px) {
   .video_suggestion_card_more_options {
+    visibility: visible;
+  }
+  .video_suggestion_card_options_container {
     visibility: visible;
   }
 }

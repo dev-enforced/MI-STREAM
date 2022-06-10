@@ -4,7 +4,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
 import styles from "./VideoPage.module.css";
 import { VideoSuggestionCard } from "components";
-import { getVideoUrl, videoShufflerFunction } from "utilities";
+import { getVideoUrl } from "utilities";
 import { addNewVideoToLikes, removeExistingVideoFromLikes } from "reduxFiles";
 import { useAlerts } from "hooks";
 
@@ -171,20 +171,18 @@ const VideoPage = () => {
       </div>
 
       <div className={`g-flex-column ${styles.video_suggestions}`}>
-        {videoShufflerFunction(videosList)
-          .slice(0, 6)
-          .map((everyVideo) => {
-            if (everyVideo._id !== videoId) {
-              return (
-                <VideoSuggestionCard
-                  key={everyVideo._id}
-                  videoReceived={everyVideo}
-                />
-              );
-            } else {
-              return null;
-            }
-          })}
+        {videosList.slice(0, 6).map((everyVideo) => {
+          if (everyVideo._id !== videoId) {
+            return (
+              <VideoSuggestionCard
+                key={everyVideo._id}
+                videoReceived={everyVideo}
+              />
+            );
+          } else {
+            return null;
+          }
+        })}
       </div>
     </div>
   );

@@ -9,7 +9,7 @@
   color: var(--text-clr-choice);
 }
 .video_menu_btn:hover {
-  background-color: var(--bg-clr-choice);
+  background-color: var(--icon-hover-clr-bg);
 }
 .menuOptionsContainer {
   border-radius: var(--border-rd-sm);
