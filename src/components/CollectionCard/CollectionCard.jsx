@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { VideoMenuOptions } from "components";
-import styles from "./CollectionCard.module.css";
 import { getVideoImg, viewCountFormatter } from "utilities";
+import styles from "./CollectionCard.module.css";
 const CollectionCard = ({ videoDetails }) => {
   const navigate = useNavigate();
   const [videoMenuOptionsView, setVideoMenuOptionsView] = useState(false);

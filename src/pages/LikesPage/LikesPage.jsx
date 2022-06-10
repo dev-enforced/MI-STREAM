@@ -1,9 +1,9 @@
-import { CollectionCard } from "components";
-import { emptyLikeImage } from "constants";
-import { EmptyPage } from "pages";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { receiveAllLikedVideos } from "reduxFiles";
+import { CollectionCard } from "components";
+import { emptyLikeImage } from "constants";
+import { EmptyPage } from "pages";
 import { getVideoImg } from "utilities";
 import styles from "./LikesPage.module.css";
 const LikesPage = () => {

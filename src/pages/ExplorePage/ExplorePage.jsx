@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { CategoryChips, VideoCard } from "components";
 import { getVideos, getCategories, updateCategorySelected } from "reduxFiles";
-import styles from "./ExplorePage.module.css";
 import {
   sortVideosAccordingToCategoryFunction,
   videoShufflerFunction,
 } from "utilities";
-
+import styles from "./ExplorePage.module.css";
 const ExplorePage = () => {
   const { videosList } = useSelector((storeReceived) => storeReceived.videos);
   const { categorySelected } = useSelector(

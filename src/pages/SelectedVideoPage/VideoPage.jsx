@@ -2,12 +2,11 @@ import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
-import styles from "./VideoPage.module.css";
 import { VideoSuggestionCard } from "components";
 import { getVideoUrl } from "utilities";
 import { addNewVideoToLikes, removeExistingVideoFromLikes } from "reduxFiles";
 import { useAlerts } from "hooks";
-
+import styles from "./VideoPage.module.css";
 const VideoPage = () => {
   const { videoId } = useParams();
   const dispatch = useDispatch();
