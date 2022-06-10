@@ -15,3 +15,8 @@ export {
   addNewVideoToLikes,
   removeExistingVideoFromLikes,
 } from "./likes/likesSlice";
+export {
+  receiveAllWatchLaterVideos,
+  addNewVideoToWatchLater,
+  removeExistingVideoFromWatchLater,
+} from "./watch-later/watchLaterSlice";

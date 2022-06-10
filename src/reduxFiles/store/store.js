@@ -5,6 +5,7 @@ import videosReducer from "../reducers/videos/videosSlice";
 import categoriesReducer from "../reducers/categories/categoriesSlice";
 import authenticationReducer from "../reducers/authentication/authenticationSlice";
 import likesReducer from "../reducers/likes/likesSlice";
+import watchLaterReducer from "../reducers/watch-later/watchLaterSlice";
 const storeGiven = configureStore({
   reducer: {
     theme: themeReducer,
@@ -13,6 +14,7 @@ const storeGiven = configureStore({
     category: categoriesReducer,
     authenticationStore: authenticationReducer,
     likesStore: likesReducer,
+    watchLaterStore: watchLaterReducer,
   },
 });
 export { storeGiven };
