@@ -17,7 +17,6 @@ const LikesPage = () => {
   useEffect(() => {
     dispatch(receiveAllLikedVideos(encodedTokenReceived));
   }, [dispatch, encodedTokenReceived]);
-  console.log(likedVideosList);
   return (
     <>
       {likedVideosList.length === 0 ? (
