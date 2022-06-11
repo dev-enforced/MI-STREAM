@@ -9,6 +9,7 @@ import {
   Signup,
   VideoPage,
   LikesPage,
+  WatchLaterPage,
 } from "pages";
 import { ProtectedRoutes } from "./ProtectedRoutes";
 
@@ -24,9 +25,11 @@ const AppRoutes = () => {
       <Route path="/signup" element={<Signup />} />
       <Route
         path="/likedvideos"
-        element={
-          <ProtectedRoutes protectedChildren={<LikesPage />}></ProtectedRoutes>
-        }
+        element={<ProtectedRoutes protectedChildren={<LikesPage />} />}
+      />
+      <Route
+        path="/watchlater"
+        element={<ProtectedRoutes protectedChildren={<WatchLaterPage />} />}
       />
     </Routes>
   );

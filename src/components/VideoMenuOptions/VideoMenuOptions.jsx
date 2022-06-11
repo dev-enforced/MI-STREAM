@@ -2,7 +2,12 @@ import React, { useRef } from "react";
 import { useOnClickOutside } from "hooks";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { addNewVideoToLikes, removeExistingVideoFromLikes } from "reduxFiles";
+import {
+  addNewVideoToLikes,
+  addNewVideoToWatchLater,
+  removeExistingVideoFromLikes,
+  removeExistingVideoFromWatchLater,
+} from "reduxFiles";
 import { useAlerts } from "hooks";
 import styles from "./VideoMenuOptions.module.css";
 
@@ -20,10 +25,20 @@ const VideoMenuOptions = (props) => {
   const { likedVideosList } = useSelector(
     (storeReceived) => storeReceived.likesStore
   );
+  const { watchLaterVideosList } = useSelector(
+    (storeReceived) => storeReceived.watchLaterStore
+  );
+
   const checkVideoPresentInLikes = (selectedVideoDetails) =>
     likedVideosList.some(
       (everyVideo) => everyVideo._id === selectedVideoDetails._id
     );
+  const checkVideoPresentInWatchLater = (selectedVideoDetails) => {
+    return watchLaterVideosList.some(
+      (everyVideo) => everyVideo._id === selectedVideoDetails._id
+    );
+  };
+
   const addVideoToLikeEvent = (selectedVideoDetails) => {
     if (!isUserLoggedIn) {
       navigate("/login", { state: { from: location } });
@@ -52,6 +67,61 @@ const VideoMenuOptions = (props) => {
       showAlerts("success", "Removed From Likes");
     }
   };
+
+  const addVideoToWatchLaterEvent = async (selectedVideoDetails) => {
+    if (!isUserLoggedIn) {
+      navigate("/login", { state: { from: location } });
+      showAlerts("error", "Please Login TO Continue");
+    } else {
+      try {
+        const submissionResponse = await dispatch(
+          addNewVideoToWatchLater({
+            videoDetailsGiven: selectedVideoDetails,
+            tokenProvided: encodedTokenReceived,
+          })
+        );
+        if (submissionResponse?.error) {
+          console.log(submissionResponse);
+          throw new Error(submissionResponse?.error);
+        }
+        if (submissionResponse?.payload) {
+          showAlerts("success", "Added To Watch Later");
+        }
+      } catch (submissionResponseError) {
+        showAlerts(
+          "error",
+          "ERROR OCCURED IN ADDING THIS VIDEO TO WATCH LATER"
+        );
+      }
+    }
+  };
+  const removeVideoFromWatchLaterEvent = async (selectedVideoDetails) => {
+    if (!isUserLoggedIn) {
+      navigate("/login", { state: { from: location } });
+      showAlerts("error", "Please Login TO Continue");
+    } else {
+      try {
+        const submissionResponse = await dispatch(
+          removeExistingVideoFromWatchLater({
+            videoDetailsGiven: selectedVideoDetails,
+            tokenProvided: encodedTokenReceived,
+          })
+        );
+        if (submissionResponse?.error) {
+          throw new Error(submissionResponse?.error);
+        }
+        if (submissionResponse?.payload) {
+          showAlerts("success", "Removed From Watch Later");
+        }
+      } catch (submissionResponseError) {
+        showAlerts(
+          "error",
+          "AN ERROR OCCURED IN REMOVING THIS VIDEO FROM WATCH LATER"
+        );
+      }
+    }
+  };
+
   //  [using it in the props later]
 
   const toggleMenuOptionsView = (event) => {
@@ -75,35 +145,58 @@ const VideoMenuOptions = (props) => {
           {videoMenuOptionsView ? (
             <div className={`${styles.menuOptionsContainer}`}>
               <ul className={`${styles.menuOptionsList} g-flex-column`}>
-                <li
-                  className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
-                >
-                  <span className="material-icons-outlined">watch_later</span>
-                  REMOVE FROM WATCH LATER
-                </li>
-                {checkVideoPresentInLikes(selectedVideo) && isUserLoggedIn ? (
+                {
                   <li
                     className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
                     onClick={(clickEvent) => {
                       clickEvent.stopPropagation();
-                      removeVideoFromLikeEvent(selectedVideo);
+                      isUserLoggedIn &&
+                      checkVideoPresentInWatchLater(selectedVideo)
+                        ? removeVideoFromWatchLaterEvent(selectedVideo)
+                        : addVideoToWatchLaterEvent(selectedVideo);
                     }}
                   >
-                    <span className="material-icons">thumb_up</span>
-                    REMOVE FROM LIKED VIDEOS
+                    <span
+                      className={
+                        isUserLoggedIn &&
+                        checkVideoPresentInWatchLater(selectedVideo)
+                          ? "material-icons"
+                          : "material-icons-outlined"
+                      }
+                    >
+                      watch_later
+                    </span>
+                    {isUserLoggedIn &&
+                    checkVideoPresentInWatchLater(selectedVideo)
+                      ? "REMOVE FROM WATCH LATER"
+                      : "ADD TO WATCH LATER"}
                   </li>
-                ) : (
+                }
+                {
                   <li
                     className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
                     onClick={(clickEvent) => {
                       clickEvent.stopPropagation();
-                      addVideoToLikeEvent(selectedVideo);
+                      checkVideoPresentInLikes(selectedVideo) && isUserLoggedIn
+                        ? removeVideoFromLikeEvent(selectedVideo)
+                        : addVideoToLikeEvent(selectedVideo);
                     }}
                   >
-                    <span className="material-icons-outlined">thumb_up</span>
-                    ADD TO LIKED VIDEOS
+                    <span
+                      className={
+                        checkVideoPresentInLikes(selectedVideo) &&
+                        isUserLoggedIn
+                          ? "material-icons"
+                          : "material-icons-outlined"
+                      }
+                    >
+                      thumb_up
+                    </span>
+                    {checkVideoPresentInLikes(selectedVideo) && isUserLoggedIn
+                      ? "REMOVE FROM FAVOURITES"
+                      : "ADD TO FAVOURITES"}
                   </li>
-                )}
+                }
               </ul>
             </div>
           ) : null}

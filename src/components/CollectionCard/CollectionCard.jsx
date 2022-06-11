@@ -30,7 +30,7 @@ const CollectionCard = ({ videoDetails }) => {
           </p>
         </div>
         <div className={`${styles.collection_card_container_other_contents}`}>
-          <span>{viewCountFormatter(viewQuantity)}</span>
+          <span>{viewCountFormatter(viewQuantity)} views</span>
           <span
             className={`material-icons ${styles.collection_card_container_other_contents_separator}`}
           >
