@@ -4,7 +4,12 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
 import { VideoSuggestionCard } from "components";
 import { getVideoUrl } from "utilities";
-import { addNewVideoToLikes, removeExistingVideoFromLikes } from "reduxFiles";
+import {
+  addNewVideoToLikes,
+  addNewVideoToWatchLater,
+  removeExistingVideoFromLikes,
+  removeExistingVideoFromWatchLater,
+} from "reduxFiles";
 import { useAlerts } from "hooks";
 import styles from "./VideoPage.module.css";
 const VideoPage = () => {
@@ -23,6 +28,9 @@ const VideoPage = () => {
   const { likedVideosList } = useSelector(
     (storeReceived) => storeReceived.likesStore
   );
+  const { watchLaterVideosList } = useSelector(
+    (storeReceived) => storeReceived.watchLaterStore
+  );
   const videoSelected = videosList.find(
     (everyVideo) => everyVideo._id === videoId
   );
@@ -37,6 +45,11 @@ const VideoPage = () => {
     likedVideosList.some(
       (everyVideo) => everyVideo._id === selectedVideoDetails._id
     );
+  const checkVideoPresentInWatchLater = (selectedVideoDetails) => {
+    return watchLaterVideosList.some(
+      (everyVideo) => everyVideo._id === selectedVideoDetails._id
+    );
+  };
   const addVideoToLikeEvent = (selectedVideoDetails) => {
     if (!isUserLoggedIn) {
       navigate("/login", { state: { from: location } });
@@ -63,6 +76,34 @@ const VideoPage = () => {
         })
       );
       showAlerts("success", "Removed From Likes");
+    }
+  };
+  const addVideoToWatchLaterEvent = (selectedVideoDetails) => {
+    if (!isUserLoggedIn) {
+      navigate("/login", { state: { from: location } });
+      showAlerts("error", "Please Login TO Continue");
+    } else {
+      dispatch(
+        addNewVideoToWatchLater({
+          videoDetailsGiven: selectedVideoDetails,
+          tokenProvided: encodedTokenReceived,
+        })
+      );
+      showAlerts("success", "Added To Watch Later");
+    }
+  };
+  const removeVideoFromWatchLaterEvent = (selectedVideoDetails) => {
+    if (!isUserLoggedIn) {
+      navigate("/login", { state: { from: location } });
+      showAlerts("error", "Please Login TO Continue");
+    } else {
+      dispatch(
+        removeExistingVideoFromWatchLater({
+          videoDetailsGiven: selectedVideoDetails,
+          tokenProvided: encodedTokenReceived,
+        })
+      );
+      showAlerts("success", "Removed From Watch Later");
     }
   };
   //   For receiving the page width whenever the window is resized and setting it
@@ -139,17 +180,37 @@ const VideoPage = () => {
                   </span>
                 </button>
               )}
-
-              <button
-                className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
-              >
-                <span
-                  className={`material-icons-outlined ${styles.selected_video_action_icon}`}
-                  title="Watch this video later"
+              {checkVideoPresentInWatchLater(videoSelected) &&
+              isUserLoggedIn ? (
+                <button
+                  className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
+                  onClick={() => {
+                    removeVideoFromWatchLaterEvent(videoSelected);
+                  }}
                 >
-                  watch_later
-                </span>
-              </button>
+                  <span
+                    className={`material-icons ${styles.selected_video_action_icon}`}
+                    title="Remove this video from watch later"
+                  >
+                    watch_later
+                  </span>
+                </button>
+              ) : (
+                <button
+                  className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
+                  onClick={() => {
+                    addVideoToWatchLaterEvent(videoSelected);
+                  }}
+                >
+                  <span
+                    className={`material-icons-outlined ${styles.selected_video_action_icon}`}
+                    title="Watch this video later"
+                  >
+                    watch_later
+                  </span>
+                </button>
+              )}
+
               <button
                 className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
               >
