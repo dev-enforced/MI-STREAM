@@ -28,7 +28,7 @@ const VideoPage = () => {
   const { likedVideosList } = useSelector(
     (storeReceived) => storeReceived.likesStore
   );
-  const { watchLaterVideosList } = useSelector(
+  const { watchLaterVideosList, status: watchLaterStatus } = useSelector(
     (storeReceived) => storeReceived.watchLaterStore
   );
   const videoSelected = videosList.find(
@@ -78,32 +78,56 @@ const VideoPage = () => {
       showAlerts("success", "Removed From Likes");
     }
   };
-  const addVideoToWatchLaterEvent = (selectedVideoDetails) => {
+  const addVideoToWatchLaterEvent = async (selectedVideoDetails) => {
     if (!isUserLoggedIn) {
       navigate("/login", { state: { from: location } });
       showAlerts("error", "Please Login TO Continue");
     } else {
-      dispatch(
-        addNewVideoToWatchLater({
-          videoDetailsGiven: selectedVideoDetails,
-          tokenProvided: encodedTokenReceived,
-        })
-      );
-      showAlerts("success", "Added To Watch Later");
+      try {
+        const submissionResponse = await dispatch(
+          addNewVideoToWatchLater({
+            videoDetailsGiven: selectedVideoDetails,
+            tokenProvided: encodedTokenReceived,
+          })
+        );
+        if (submissionResponse?.error) {
+          throw new Error(submissionResponse?.error);
+        }
+        if (submissionResponse?.payload) {
+          showAlerts("success", "Added To Watch Later");
+        }
+      } catch (submissionResponseError) {
+        showAlerts(
+          "error",
+          "ERROR OCCURED IN ADDING THIS VIDEO TO WATCH LATER"
+        );
+      }
     }
   };
-  const removeVideoFromWatchLaterEvent = (selectedVideoDetails) => {
+  const removeVideoFromWatchLaterEvent = async (selectedVideoDetails) => {
     if (!isUserLoggedIn) {
       navigate("/login", { state: { from: location } });
       showAlerts("error", "Please Login TO Continue");
     } else {
-      dispatch(
-        removeExistingVideoFromWatchLater({
-          videoDetailsGiven: selectedVideoDetails,
-          tokenProvided: encodedTokenReceived,
-        })
-      );
-      showAlerts("success", "Removed From Watch Later");
+      try {
+        const submissionResponse = await dispatch(
+          removeExistingVideoFromWatchLater({
+            videoDetailsGiven: selectedVideoDetails,
+            tokenProvided: encodedTokenReceived,
+          })
+        );
+        if (submissionResponse?.error) {
+          throw new Error(submissionResponse?.error);
+        }
+        if (submissionResponse?.payload) {
+          showAlerts("success", "Removed From Watch Later");
+        }
+      } catch (submissionResponseError) {
+        showAlerts(
+          "error",
+          "AN ERROR OCCURED IN REMOVING THIS VIDEO FROM WATCH LATER"
+        );
+      }
     }
   };
   //   For receiving the page width whenever the window is resized and setting it
@@ -184,6 +208,7 @@ const VideoPage = () => {
               isUserLoggedIn ? (
                 <button
                   className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
+                  disabled={watchLaterStatus === "pending"}
                   onClick={() => {
                     removeVideoFromWatchLaterEvent(videoSelected);
                   }}
@@ -198,6 +223,7 @@ const VideoPage = () => {
               ) : (
                 <button
                   className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
+                  disabled={watchLaterStatus === "pending"}
                   onClick={() => {
                     addVideoToWatchLaterEvent(videoSelected);
                   }}

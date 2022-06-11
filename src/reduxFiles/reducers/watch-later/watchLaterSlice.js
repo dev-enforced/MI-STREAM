@@ -9,7 +9,7 @@ const initialState = {
   watchLaterVideosList: [],
 };
 
-const receiveAllWatchLaterVideosHandler = async (tokenProvided) => {
+const receiveAllWatchLaterVideosHandler = async (tokenProvided,{rejectWithValue}) => {
   try {
     const {
       data: { watchlater: watchLaterVideosResponseReceived },
@@ -78,13 +78,22 @@ const watchLaterSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(receiveAllWatchLaterVideos.pending, (state, action) => {
+        state.status = "pending";
+      })
       .addCase(receiveAllWatchLaterVideos.fulfilled, (state, action) => {
         state.status = "fulfilled";
         state.watchLaterVideosList = action.payload;
       })
+      .addCase(addNewVideoToWatchLater.pending, (state, action) => {
+        state.status = "pending";
+      })
       .addCase(addNewVideoToWatchLater.fulfilled, (state, action) => {
         state.status = "fulfilled";
         state.watchLaterVideosList = action.payload;
+      })
+      .addCase(removeExistingVideoFromWatchLater.pending, (state, action) => {
+        state.status = "pending";
       })
       .addCase(removeExistingVideoFromWatchLater.fulfilled, (state, action) => {
         state.status = "fulfilled";
