@@ -145,54 +145,58 @@ const VideoMenuOptions = (props) => {
           {videoMenuOptionsView ? (
             <div className={`${styles.menuOptionsContainer}`}>
               <ul className={`${styles.menuOptionsList} g-flex-column`}>
-                {isUserLoggedIn &&
-                checkVideoPresentInWatchLater(selectedVideo) ? (
+                {
                   <li
                     className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
                     onClick={(clickEvent) => {
                       clickEvent.stopPropagation();
-                      removeVideoFromWatchLaterEvent(selectedVideo);
+                      isUserLoggedIn &&
+                      checkVideoPresentInWatchLater(selectedVideo)
+                        ? removeVideoFromWatchLaterEvent(selectedVideo)
+                        : addVideoToWatchLaterEvent(selectedVideo);
                     }}
                   >
-                    <span className="material-icons">watch_later</span>
-                    REMOVE FROM WATCH LATER
+                    <span
+                      className={
+                        isUserLoggedIn &&
+                        checkVideoPresentInWatchLater(selectedVideo)
+                          ? "material-icons"
+                          : "material-icons-outlined"
+                      }
+                    >
+                      watch_later
+                    </span>
+                    {isUserLoggedIn &&
+                    checkVideoPresentInWatchLater(selectedVideo)
+                      ? "REMOVE FROM WATCH LATER"
+                      : "ADD TO WATCH LATER"}
                   </li>
-                ) : (
+                }
+                {
                   <li
                     className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
                     onClick={(clickEvent) => {
                       clickEvent.stopPropagation();
-                      addVideoToWatchLaterEvent(selectedVideo);
+                      checkVideoPresentInLikes(selectedVideo) && isUserLoggedIn
+                        ? removeVideoFromLikeEvent(selectedVideo)
+                        : addVideoToLikeEvent(selectedVideo);
                     }}
                   >
-                    <span className="material-icons-outlined">watch_later</span>
-                    ADD TO WATCH LATER
+                    <span
+                      className={
+                        checkVideoPresentInLikes(selectedVideo) &&
+                        isUserLoggedIn
+                          ? "material-icons"
+                          : "material-icons-outlined"
+                      }
+                    >
+                      thumb_up
+                    </span>
+                    {checkVideoPresentInLikes(selectedVideo) && isUserLoggedIn
+                      ? "REMOVE FROM FAVOURITES"
+                      : "ADD TO FAVOURITES"}
                   </li>
-                )}
-
-                {checkVideoPresentInLikes(selectedVideo) && isUserLoggedIn ? (
-                  <li
-                    className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
-                    onClick={(clickEvent) => {
-                      clickEvent.stopPropagation();
-                      removeVideoFromLikeEvent(selectedVideo);
-                    }}
-                  >
-                    <span className="material-icons">thumb_up</span>
-                    REMOVE FROM LIKED VIDEOS
-                  </li>
-                ) : (
-                  <li
-                    className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
-                    onClick={(clickEvent) => {
-                      clickEvent.stopPropagation();
-                      addVideoToLikeEvent(selectedVideo);
-                    }}
-                  >
-                    <span className="material-icons-outlined">thumb_up</span>
-                    ADD TO LIKED VIDEOS
-                  </li>
-                )}
+                }
               </ul>
             </div>
           ) : null}

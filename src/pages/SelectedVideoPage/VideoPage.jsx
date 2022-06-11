@@ -175,67 +175,60 @@ const VideoPage = () => {
             <div
               className={`g-flex-row g-flex-center ${styles.selected_video_actions}`}
             >
-              {checkVideoPresentInLikes(videoSelected) && isUserLoggedIn ? (
+              {
                 <button
                   className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
                   onClick={() => {
-                    removeVideoFromLikeEvent(videoSelected);
+                    checkVideoPresentInLikes(videoSelected) && isUserLoggedIn
+                      ? removeVideoFromLikeEvent(videoSelected)
+                      : addVideoToLikeEvent(videoSelected);
                   }}
                 >
                   <span
-                    className={`material-icons ${styles.selected_video_action_icon}`}
-                    title="Remove this video from likes"
+                    className={`${
+                      checkVideoPresentInLikes(videoSelected) && isUserLoggedIn
+                        ? "material-icons"
+                        : "material-icons-outlined"
+                    } ${styles.selected_video_action_icon}`}
+                    title={
+                      checkVideoPresentInLikes(videoSelected) && isUserLoggedIn
+                        ? "Remove this video from likes"
+                        : "Add This Video To Likes"
+                    }
                   >
                     thumb_up
                   </span>
                 </button>
-              ) : (
-                <button
-                  className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
-                  onClick={() => {
-                    addVideoToLikeEvent(videoSelected);
-                  }}
-                >
-                  <span
-                    className={`material-icons-outlined ${styles.selected_video_action_icon}`}
-                    title="Like this video"
-                  >
-                    thumb_up
-                  </span>
-                </button>
-              )}
-              {checkVideoPresentInWatchLater(videoSelected) &&
-              isUserLoggedIn ? (
+              }
+              {
                 <button
                   className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
                   disabled={watchLaterStatus === "pending"}
                   onClick={() => {
-                    removeVideoFromWatchLaterEvent(videoSelected);
+                    checkVideoPresentInWatchLater(videoSelected) &&
+                    isUserLoggedIn
+                      ? removeVideoFromWatchLaterEvent(videoSelected)
+                      : addVideoToWatchLaterEvent(videoSelected);
                   }}
                 >
                   <span
-                    className={`material-icons ${styles.selected_video_action_icon}`}
-                    title="Remove this video from watch later"
+                    className={`${
+                      checkVideoPresentInWatchLater(videoSelected) &&
+                      isUserLoggedIn
+                        ? "material-icons"
+                        : "material-icons-outlined"
+                    } ${styles.selected_video_action_icon}`}
+                    title={
+                      checkVideoPresentInWatchLater(videoSelected) &&
+                      isUserLoggedIn
+                        ? "Remove this video from watch later"
+                        : "Add This Video To Watch Later"
+                    }
                   >
                     watch_later
                   </span>
                 </button>
-              ) : (
-                <button
-                  className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
-                  disabled={watchLaterStatus === "pending"}
-                  onClick={() => {
-                    addVideoToWatchLaterEvent(videoSelected);
-                  }}
-                >
-                  <span
-                    className={`material-icons-outlined ${styles.selected_video_action_icon}`}
-                    title="Watch this video later"
-                  >
-                    watch_later
-                  </span>
-                </button>
-              )}
+              }
 
               <button
                 className={`${styles.selected_video_action_btn} g-flex-row g-flex-center text-cursor-pointer`}
