@@ -2,7 +2,12 @@ import React, { useRef } from "react";
 import { useOnClickOutside } from "hooks";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { addNewVideoToLikes, removeExistingVideoFromLikes } from "reduxFiles";
+import {
+  addNewVideoToLikes,
+  addNewVideoToWatchLater,
+  removeExistingVideoFromLikes,
+  removeExistingVideoFromWatchLater,
+} from "reduxFiles";
 import { useAlerts } from "hooks";
 import styles from "./VideoMenuOptions.module.css";
 
@@ -20,10 +25,20 @@ const VideoMenuOptions = (props) => {
   const { likedVideosList } = useSelector(
     (storeReceived) => storeReceived.likesStore
   );
+  const { watchLaterVideosList } = useSelector(
+    (storeReceived) => storeReceived.watchLaterStore
+  );
+
   const checkVideoPresentInLikes = (selectedVideoDetails) =>
     likedVideosList.some(
       (everyVideo) => everyVideo._id === selectedVideoDetails._id
     );
+  const checkVideoPresentInWatchLater = (selectedVideoDetails) => {
+    return watchLaterVideosList.some(
+      (everyVideo) => everyVideo._id === selectedVideoDetails._id
+    );
+  };
+
   const addVideoToLikeEvent = (selectedVideoDetails) => {
     if (!isUserLoggedIn) {
       navigate("/login", { state: { from: location } });
@@ -52,6 +67,35 @@ const VideoMenuOptions = (props) => {
       showAlerts("success", "Removed From Likes");
     }
   };
+
+  const addVideoToWatchLaterEvent = (selectedVideoDetails) => {
+    if (!isUserLoggedIn) {
+      navigate("/login", { state: { from: location } });
+      showAlerts("error", "Please Login TO Continue");
+    } else {
+      dispatch(
+        addNewVideoToWatchLater({
+          videoDetailsGiven: selectedVideoDetails,
+          tokenProvided: encodedTokenReceived,
+        })
+      );
+      showAlerts("success", "Added To Watch Later");
+    }
+  };
+  const removeVideoFromWatchLaterEvent = (selectedVideoDetails) => {
+    if (!isUserLoggedIn) {
+      navigate("/login", { state: { from: location } });
+      showAlerts("error", "Please Login TO Continue");
+    } else {
+      dispatch(
+        removeExistingVideoFromWatchLater({
+          videoDetailsGiven: selectedVideoDetails,
+          tokenProvided: encodedTokenReceived,
+        })
+      );
+      showAlerts("success", "Removed From Watch Later");
+    }
+  };
   //  [using it in the props later]
 
   const toggleMenuOptionsView = (event) => {
@@ -75,12 +119,31 @@ const VideoMenuOptions = (props) => {
           {videoMenuOptionsView ? (
             <div className={`${styles.menuOptionsContainer}`}>
               <ul className={`${styles.menuOptionsList} g-flex-column`}>
-                <li
-                  className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
-                >
-                  <span className="material-icons-outlined">watch_later</span>
-                  REMOVE FROM WATCH LATER
-                </li>
+                {isUserLoggedIn &&
+                checkVideoPresentInWatchLater(selectedVideo) ? (
+                  <li
+                    className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
+                    onClick={(clickEvent) => {
+                      clickEvent.stopPropagation();
+                      removeVideoFromWatchLaterEvent(selectedVideo);
+                    }}
+                  >
+                    <span className="material-icons">watch_later</span>
+                    REMOVE FROM WATCH LATER
+                  </li>
+                ) : (
+                  <li
+                    className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
+                    onClick={(clickEvent) => {
+                      clickEvent.stopPropagation();
+                      addVideoToWatchLaterEvent(selectedVideo);
+                    }}
+                  >
+                    <span className="material-icons-outlined">watch_later</span>
+                    ADD TO WATCH LATER
+                  </li>
+                )}
+
                 {checkVideoPresentInLikes(selectedVideo) && isUserLoggedIn ? (
                   <li
                     className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}

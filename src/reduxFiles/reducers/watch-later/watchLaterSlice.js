@@ -82,7 +82,7 @@ const watchLaterSlice = createSlice({
         state.status = "fulfilled";
         state.watchLaterVideosList = action.payload;
       })
-      .addCase(addNewVideoToWatchLater, (state, action) => {
+      .addCase(addNewVideoToWatchLater.fulfilled, (state, action) => {
         state.status = "fulfilled";
         state.watchLaterVideosList = action.payload;
       })
