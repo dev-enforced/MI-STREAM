@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   addNewVideoToLikes,
   addNewVideoToWatchLater,
+  removeExistingVideoFromHistory,
   removeExistingVideoFromLikes,
   removeExistingVideoFromWatchLater,
 } from "reduxFiles";
@@ -15,6 +16,7 @@ const VideoMenuOptions = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+  const { pathname } = location;
   const { showAlerts } = useAlerts();
   const menuOptionsRef = useRef();
   const { selectedVideo, videoMenuOptionsView, setVideoMenuOptionsView } =
@@ -25,7 +27,7 @@ const VideoMenuOptions = (props) => {
   const { likedVideosList } = useSelector(
     (storeReceived) => storeReceived.likesStore
   );
-  const { watchLaterVideosList } = useSelector(
+  const { watchLaterVideosList, status: historyStatus } = useSelector(
     (storeReceived) => storeReceived.watchLaterStore
   );
 
@@ -81,7 +83,6 @@ const VideoMenuOptions = (props) => {
           })
         );
         if (submissionResponse?.error) {
-          console.log(submissionResponse);
           throw new Error(submissionResponse?.error);
         }
         if (submissionResponse?.payload) {
@@ -122,6 +123,29 @@ const VideoMenuOptions = (props) => {
     }
   };
 
+  const removeVideoFromHistoryEvent = async (selectedVideoDetails) => {
+    if (!isUserLoggedIn) {
+      navigate("/login", { state: { from: location } });
+      showAlerts("error", "Please Login TO Continue");
+    } else {
+      try {
+        const eventResponse = await dispatch(
+          removeExistingVideoFromHistory({
+            videoDetailsGiven: selectedVideoDetails,
+            tokenProvided: encodedTokenReceived,
+          })
+        );
+        if (eventResponse?.error) {
+          throw new Error(eventResponse.error);
+        }
+        if (eventResponse?.payload) {
+          showAlerts("success", "Video Removed From History");
+        }
+      } catch (removeVideoFromHistoryEventError) {
+        showAlerts("error", "Error in removing Video  From History");
+      }
+    }
+  };
   //  [using it in the props later]
 
   const toggleMenuOptionsView = (event) => {
@@ -197,6 +221,19 @@ const VideoMenuOptions = (props) => {
                       : "ADD TO FAVOURITES"}
                   </li>
                 }
+                {pathname === "/history" && (
+                  <li
+                    className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
+                    disabled={historyStatus === "pending"}
+                    onClick={(clickEvent) => {
+                      clickEvent.stopPropagation();
+                      removeVideoFromHistoryEvent(selectedVideo);
+                    }}
+                  >
+                    <span className="material-icons-outlined">delete</span>
+                    Remove From History
+                  </li>
+                )}
               </ul>
             </div>
           ) : null}
