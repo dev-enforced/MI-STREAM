@@ -20,3 +20,9 @@ export {
   addNewVideoToWatchLater,
   removeExistingVideoFromWatchLater,
 } from "./watch-later/watchLaterSlice";
+export {
+  receiveAllHistoryVideos,
+  addNewVideoToHistory,
+  clearEntireHistory,
+  removeExistingVideoFromHistory,
+} from "./history/historySlice";

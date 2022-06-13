@@ -10,6 +10,7 @@ import {
   VideoPage,
   LikesPage,
   WatchLaterPage,
+  HistoryPage,
 } from "pages";
 import { ProtectedRoutes } from "./ProtectedRoutes";
 
@@ -30,6 +31,10 @@ const AppRoutes = () => {
       <Route
         path="/watchlater"
         element={<ProtectedRoutes protectedChildren={<WatchLaterPage />} />}
+      />
+      <Route
+        path="/history"
+        element={<ProtectedRoutes protectedChildren={<HistoryPage />} />}
       />
     </Routes>
   );

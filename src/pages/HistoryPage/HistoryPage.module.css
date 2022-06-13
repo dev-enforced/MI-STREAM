@@ -1,0 +1,51 @@
+.history_page {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem;
+}
+.history_page_title_card_container {
+  align-self: flex-start;
+  min-width: 25rem;
+  flex-basis: 30%;
+  gap: 1rem;
+}
+.history_page_title_card {
+  position: relative;
+}
+.history_page_title_card_img{
+    width: 100%;
+}
+.history_page_title_card_content{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    gap: 0.5rem;
+    background-color: var(--text-clr-choice);
+    color:var(--bg-clr-choice);
+}
+.history_page_video_list{
+    flex-grow: 1;
+}
+
+.history_page_clear_all{
+    border: transparent;
+    outline: transparent;
+    background: transparent;
+    font-weight: 700;
+    font-family: 'Catamaran',sans-serif;
+    padding: 0.75rem 1rem;
+    border-radius: var(--border-rd-sm);
+    align-self: flex-start;
+    background-color: var(--primary-color);
+    color: var(--text-clr-choice);
+    cursor: pointer;
+}
+@media screen and (max-width: 1020px) {
+  .history_page {
+    flex-direction: column;
+  }
+  .history_page_title_card_container {
+    flex-basis: 100%;
+    min-width: unset;
+  }
+}

@@ -9,6 +9,8 @@ import {
   addNewVideoToWatchLater,
   removeExistingVideoFromLikes,
   removeExistingVideoFromWatchLater,
+  addNewVideoToHistory,
+  removeExistingVideoFromHistory,
 } from "reduxFiles";
 import { useAlerts } from "hooks";
 import styles from "./VideoPage.module.css";
@@ -31,6 +33,9 @@ const VideoPage = () => {
   const { watchLaterVideosList, status: watchLaterStatus } = useSelector(
     (storeReceived) => storeReceived.watchLaterStore
   );
+  const { historyVideosList } = useSelector(
+    (storeReceived) => storeReceived.historyStore
+  );
   const videoSelected = videosList.find(
     (everyVideo) => everyVideo._id === videoId
   );
@@ -48,6 +53,26 @@ const VideoPage = () => {
   const checkVideoPresentInWatchLater = (selectedVideoDetails) => {
     return watchLaterVideosList.some(
       (everyVideo) => everyVideo._id === selectedVideoDetails._id
+    );
+  };
+  const checkVideoPresentInHistory = (selectedVideoDetails) =>
+    historyVideosList.some(
+      (everyVideo) => everyVideo._id === selectedVideoDetails._id
+    );
+  const addNewVideoToHistoryEvent = (selectedVideoDetails) => {
+    if (checkVideoPresentInHistory(selectedVideoDetails)) {
+      dispatch(
+        removeExistingVideoFromHistory({
+          videoDetailsGiven: selectedVideoDetails,
+          tokenProvided: encodedTokenReceived,
+        })
+      );
+    }
+    dispatch(
+      addNewVideoToHistory({
+        videoDetailsGiven: selectedVideoDetails,
+        tokenProvided: encodedTokenReceived,
+      })
     );
   };
   const addVideoToLikeEvent = (selectedVideoDetails) => {
@@ -156,6 +181,10 @@ const VideoPage = () => {
             height="100%"
             url={`${getVideoUrl(videoId)}`}
             controls
+            playing
+            onStart={() => {
+              addNewVideoToHistoryEvent(videoSelected);
+            }}
           />
         </div>
         <div className={`${styles.selected_video_contents} g-flex-column`}>

@@ -6,6 +6,7 @@ import categoriesReducer from "../reducers/categories/categoriesSlice";
 import authenticationReducer from "../reducers/authentication/authenticationSlice";
 import likesReducer from "../reducers/likes/likesSlice";
 import watchLaterReducer from "../reducers/watch-later/watchLaterSlice";
+import historyReducer from "../reducers/history/historySlice";
 const storeGiven = configureStore({
   reducer: {
     theme: themeReducer,
@@ -15,6 +16,7 @@ const storeGiven = configureStore({
     authenticationStore: authenticationReducer,
     likesStore: likesReducer,
     watchLaterStore: watchLaterReducer,
+    historyStore: historyReducer,
   },
 });
 export { storeGiven };
