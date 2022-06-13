@@ -15,6 +15,11 @@ const sidebarLinks = [
     redirect: "/likedvideos",
   },
   {
+    title: "Playlists",
+    iconName: "playlist_play",
+    redirect: "/playlists",
+  },
+  {
     title: "Watch Later",
     iconName: "watch_later",
     redirect: "/watchlater",

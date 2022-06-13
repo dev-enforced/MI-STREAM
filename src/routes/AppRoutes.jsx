@@ -11,6 +11,7 @@ import {
   LikesPage,
   WatchLaterPage,
   HistoryPage,
+  PlaylistsPage,
 } from "pages";
 import { ProtectedRoutes } from "./ProtectedRoutes";
 
@@ -35,6 +36,10 @@ const AppRoutes = () => {
       <Route
         path="/history"
         element={<ProtectedRoutes protectedChildren={<HistoryPage />} />}
+      />
+      <Route
+        path="/playlists"
+        element={<ProtectedRoutes protectedChildren={<PlaylistsPage />} />}
       />
     </Routes>
   );
