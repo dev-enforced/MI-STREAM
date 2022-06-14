@@ -26,3 +26,11 @@ export {
   clearEntireHistory,
   removeExistingVideoFromHistory,
 } from "./history/historySlice";
+export {
+  receiveAllUserPlaylists,
+  createNewPlaylist,
+  deleteExistingPlaylist,
+  receiveSinglePlaylistDetails,
+  addNewVideoToPlaylist,
+  deleteExistingVideoFromPlaylist,
+} from "./playlists/playlistsSlice";
