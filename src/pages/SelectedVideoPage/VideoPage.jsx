@@ -11,6 +11,7 @@ import {
   removeExistingVideoFromWatchLater,
   addNewVideoToHistory,
   removeExistingVideoFromHistory,
+  toggleModalDisplay,
 } from "reduxFiles";
 import { useAlerts } from "hooks";
 import styles from "./VideoPage.module.css";
@@ -265,6 +266,13 @@ const VideoPage = () => {
                 <span
                   className={`material-icons-outlined ${styles.selected_video_action_icon}`}
                   title="Add this video to a playlist"
+                  onClick={() => {
+                    if (isUserLoggedIn) {
+                      dispatch(toggleModalDisplay());
+                    } else {
+                      navigate("/login", { state: { from: location } });
+                    }
+                  }}
                 >
                   playlist_add
                 </span>

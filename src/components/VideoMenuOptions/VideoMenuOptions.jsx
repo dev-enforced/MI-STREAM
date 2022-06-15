@@ -8,6 +8,7 @@ import {
   removeExistingVideoFromHistory,
   removeExistingVideoFromLikes,
   removeExistingVideoFromWatchLater,
+  toggleModalDisplay
 } from "reduxFiles";
 import { useAlerts } from "hooks";
 import styles from "./VideoMenuOptions.module.css";
@@ -27,7 +28,7 @@ const VideoMenuOptions = (props) => {
   const { likedVideosList } = useSelector(
     (storeReceived) => storeReceived.likesStore
   );
-  const { watchLaterVideosList, status: historyStatus } = useSelector(
+  const { watchLaterVideosList } = useSelector(
     (storeReceived) => storeReceived.watchLaterStore
   );
 
@@ -221,10 +222,20 @@ const VideoMenuOptions = (props) => {
                       : "ADD TO FAVOURITES"}
                   </li>
                 }
+                { pathname!=="/playlists" &&
+                  <li
+                    className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
+                    onClick={(clickEvent)=>{
+                      clickEvent.stopPropagation();
+                      dispatch(toggleModalDisplay())
+                    }}>
+                      <span className="material-icons">playlist_add</span>
+                      SAVE TO PLAYLIST
+                    </li>
+                }
                 {pathname === "/history" && (
                   <li
                     className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
-                    disabled={historyStatus === "pending"}
                     onClick={(clickEvent) => {
                       clickEvent.stopPropagation();
                       removeVideoFromHistoryEvent(selectedVideo);
@@ -234,6 +245,7 @@ const VideoMenuOptions = (props) => {
                     Remove From History
                   </li>
                 )}
+
               </ul>
             </div>
           ) : null}

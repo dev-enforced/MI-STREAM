@@ -1,0 +1,56 @@
+.playlistModal_container {
+  height: max-content;
+  min-width: 30%;
+  background-color: var(--text-clr-choice);
+  color: var(--bg-clr-choice);
+  border-radius: var(--border-rd-md);
+  padding: 2rem;
+  position: relative;
+  gap: 1rem;
+}
+
+.close_playlist_modal {
+  border: transparent;
+  background-color: transparent;
+  padding: 0.35rem;
+  border-radius: var(--border-rd-circle);
+  display: inline-flex;
+  cursor: pointer;
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  color: var(--primary-color);
+}
+
+.form_input_group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.form_input_label {
+  width: 100%;
+}
+.form_input {
+  width: 100%;
+  margin-top: 3px;
+  padding: 5px 12px;
+  height: 2rem;
+  border-radius: var(--border-rd-sm);
+  background-color: transparent;
+  color: var(--primary-color);
+  outline: transparent;
+}
+.create_playlist_btn {
+  background-color: var(--primary-color);
+  color: var(--bg-clr-choice);
+  min-width: 8.75rem;
+  width: max-content;
+  height: 2.5rem;
+  cursor: pointer;
+  padding: 0.5rem 1.5rem;
+  border-radius: var(--border-rd-md);
+  border: transparent;
+}

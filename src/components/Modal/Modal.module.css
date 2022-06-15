@@ -1,0 +1,6 @@
+.modal_container {
+  position: fixed;
+  inset: 0;
+  background-color: #00000066;
+  z-index: 10;
+}

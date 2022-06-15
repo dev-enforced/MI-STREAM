@@ -34,3 +34,4 @@ export {
   addNewVideoToPlaylist,
   deleteExistingVideoFromPlaylist,
 } from "./playlists/playlistsSlice";
+export { toggleModalDisplay } from "./modalDisplay/modalDisplaySlice";
