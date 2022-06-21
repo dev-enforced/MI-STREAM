@@ -8,7 +8,6 @@ import styles from "./HistoryPage.module.css";
 import { getVideoImg } from "utilities";
 import { useAlerts } from "hooks";
 
-
 const HistoryPage = () => {
   const dispatch = useDispatch();
   const { status, historyVideosList } = useSelector(
@@ -17,7 +16,7 @@ const HistoryPage = () => {
   const { encodedTokenReceived } = useSelector(
     (storeReceived) => storeReceived.authenticationStore
   );
-  const {showAlerts}=useAlerts();
+  const { showAlerts } = useAlerts();
   useEffect(() => {
     dispatch(receiveAllHistoryVideos(encodedTokenReceived));
   }, [dispatch, encodedTokenReceived]);
@@ -56,7 +55,7 @@ const HistoryPage = () => {
                   className={`${styles.history_page_clear_all}`}
                   onClick={() => {
                     dispatch(clearEntireHistory(encodedTokenReceived));
-                    showAlerts("success","Cleared the whole history")
+                    showAlerts("success", "Cleared the whole history");
                   }}
                 >
                   Clear All

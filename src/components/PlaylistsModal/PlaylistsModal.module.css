@@ -1,3 +1,14 @@
+.dark {
+  --bg-clr-choice: #1c2538;
+  /* --heading-clr-choice: #25a8ee; */
+  --icon-hover-clr-bg: #34375aa3;
+  --text-clr-choice: #ecf0ee;
+  --bg-faded: #181818df;
+  --icon-background: #2f2f2f;
+  --bx-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  --primary-color: #25a8ee;
+}
+
 .playlistModal_container {
   height: max-content;
   min-width: 30%;

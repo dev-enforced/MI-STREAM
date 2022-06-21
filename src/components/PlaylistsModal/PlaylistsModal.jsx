@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Modal } from "components";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleModalDisplay } from "reduxFiles";
+import { createNewPlaylist, toggleModalDisplay } from "reduxFiles";
 import { useLocation } from "react-router-dom";
+import { useAlerts } from "hooks";
 import styles from "./PlaylistsModal.module.css";
 
 const PlaylistsModal = () => {
+  const { showAlerts } = useAlerts();
   const emptyPlaylistInformation = {
     title: "",
     description: "",
@@ -17,9 +19,21 @@ const PlaylistsModal = () => {
     newPlaylistInformation;
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const { playlistsProvided } = useSelector(
+  const { playlistsProvided, error: playlistOperationError } = useSelector(
     (storeReceived) => storeReceived.playlistsStore
   );
+  const { encodedTokenReceived } = useSelector(
+    (storeReceived) => storeReceived.authenticationStore
+  );
+  const { themeProvided } = useSelector((storeReceived) => storeReceived.theme);
+  const getClassName = (darkMode) => {
+    if (darkMode) {
+      return styles.dark;
+    } else {
+      return "";
+    }
+  };
+
   const generatePlaylistInformation = (changeEvent) => {
     const { name, value: valueGiven } = changeEvent.target;
     setNewPlaylistInformation((prevValue) => ({
@@ -27,12 +41,28 @@ const PlaylistsModal = () => {
       [name]: valueGiven,
     }));
   };
-  console.log(playlistsProvided, newPlaylistInformation);
+
+  const createNewPlaylistEvent = () => {
+    if (inputTitle === "" && inputDescription === "") {
+      showAlerts("info", "Please enter all details.");
+    } else {
+      dispatch(
+        createNewPlaylist({
+          playlistDetailsGiven: newPlaylistInformation,
+          tokenProvided: encodedTokenReceived,
+        })
+      );
+      setNewPlaylistInformation(emptyPlaylistInformation);
+      showAlerts("success", "Playlist created successfully");
+    }
+  };
 
   return (
     <Modal>
       <div
-        className={`${styles.playlistModal_container} g-flex-column g-flex-center`}
+        className={`${
+          styles.playlistModal_container
+        } g-flex-column g-flex-center ${getClassName(themeProvided)}`}
         onClick={(clickEvent) => {
           clickEvent.stopPropagation();
         }}
@@ -56,7 +86,7 @@ const PlaylistsModal = () => {
         <form
           onSubmit={(submissionEvent) => {
             submissionEvent.preventDefault();
-            setNewPlaylistInformation(emptyPlaylistInformation);
+            createNewPlaylistEvent();
           }}
           className={`g-flex-column gentle-flex-gap`}
         >
