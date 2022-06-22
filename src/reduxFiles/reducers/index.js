@@ -33,5 +33,6 @@ export {
   receiveSinglePlaylistDetails,
   addNewVideoToPlaylist,
   deleteExistingVideoFromPlaylist,
+  updateVideoSelected,
 } from "./playlists/playlistsSlice";
 export { toggleModalDisplay } from "./modalDisplay/modalDisplaySlice";

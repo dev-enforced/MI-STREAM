@@ -11,6 +11,7 @@ const initialPlaylistState = {
   status: null,
   playlistsProvided: [],
   playlistSelected: {},
+  videoSelected: {},
   error: null,
 };
 
@@ -116,7 +117,7 @@ const addNewVideoToPlaylistHandler = async (
 };
 
 const deleteExistingVideoFromPlaylistHandler = async (
-  { playlistDetailsGiven, videoToBeAdded, tokenProvided },
+  { playlistDetailsGiven, videoToBeDeleted, tokenProvided },
   { rejectWithValue }
 ) => {
   try {
@@ -124,11 +125,11 @@ const deleteExistingVideoFromPlaylistHandler = async (
       data: { playlist: playlistDataReceivedFromResponse },
     } = await deleteExistingVideoFromPlaylistService(
       playlistDetailsGiven,
-      videoToBeAdded,
+      videoToBeDeleted,
       tokenProvided
     );
     return playlistDataReceivedFromResponse;
-  } catch (addNewVideoToPlaylistError) {
+  } catch (deleteExistingVideoFromPlaylistError) {
     console.error(
       "AN ERROR OCCURED WHILE ADDING THIS VIDEO TO THIS PLAYLIST THROUGH REDUX"
     );
@@ -166,7 +167,11 @@ const deleteExistingVideoFromPlaylist = createAsyncThunk(
 const playlistsSlice = createSlice({
   name: "userPlaylists",
   initialState: initialPlaylistState,
-  reducers: {},
+  reducers: {
+    updateVideoSelected: (state, action) => {
+      state.videoSelected = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(receiveAllUserPlaylists.pending, (state, action) => {
@@ -217,7 +222,7 @@ const playlistsSlice = createSlice({
       })
       .addCase(addNewVideoToPlaylist.fulfilled, (state, action) => {
         state.status = "fulfilled";
-        const playlistsUpdated = state.playlists.map((everyPlaylist) =>
+        const playlistsUpdated = state.playlistsProvided.map((everyPlaylist) =>
           everyPlaylist._id === action.payload._id
             ? action.payload
             : everyPlaylist
@@ -233,7 +238,7 @@ const playlistsSlice = createSlice({
       })
       .addCase(deleteExistingVideoFromPlaylist.fulfilled, (state, action) => {
         state.status = "fulfilled";
-        const playlistsUpdated = state.playlists.map((everyPlaylist) =>
+        const playlistsUpdated = state.playlistsProvided.map((everyPlaylist) =>
           everyPlaylist._id === action.payload._id
             ? action.payload
             : everyPlaylist
@@ -246,6 +251,7 @@ const playlistsSlice = createSlice({
       });
   },
 });
+export const { updateVideoSelected } = playlistsSlice.actions;
 export {
   receiveAllUserPlaylists,
   createNewPlaylist,

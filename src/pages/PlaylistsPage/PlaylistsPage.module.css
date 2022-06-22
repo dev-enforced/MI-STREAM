@@ -40,6 +40,15 @@
   cursor: pointer;
 }
 
+.single_playlist_details {
+  flex-grow: 1;
+}
+
+.selected_playlist{
+  background:hsla(0,0%,100%,.1);
+  color: var(--primary-color);
+}
+
 @media screen and (max-width: 1020px) {
   .playlist_page {
     flex-direction: column;

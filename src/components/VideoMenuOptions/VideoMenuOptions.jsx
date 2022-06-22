@@ -5,10 +5,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   addNewVideoToLikes,
   addNewVideoToWatchLater,
+  deleteExistingVideoFromPlaylist,
   removeExistingVideoFromHistory,
   removeExistingVideoFromLikes,
   removeExistingVideoFromWatchLater,
-  toggleModalDisplay
+  toggleModalDisplay,
+  updateVideoSelected,
 } from "reduxFiles";
 import { useAlerts } from "hooks";
 import styles from "./VideoMenuOptions.module.css";
@@ -20,8 +22,12 @@ const VideoMenuOptions = (props) => {
   const { pathname } = location;
   const { showAlerts } = useAlerts();
   const menuOptionsRef = useRef();
-  const { selectedVideo, videoMenuOptionsView, setVideoMenuOptionsView } =
-    props;
+  const {
+    selectedVideo,
+    videoMenuOptionsView,
+    setVideoMenuOptionsView,
+    playlistData,
+  } = props;
   const { isUserLoggedIn, encodedTokenReceived } = useSelector(
     (storeReceived) => storeReceived.authenticationStore
   );
@@ -31,6 +37,10 @@ const VideoMenuOptions = (props) => {
   const { watchLaterVideosList } = useSelector(
     (storeReceived) => storeReceived.watchLaterStore
   );
+
+  const {
+    error: playlistOperationError,
+  } = useSelector((storeReceived) => storeReceived.playlistsStore);
 
   const checkVideoPresentInLikes = (selectedVideoDetails) =>
     likedVideosList.some(
@@ -154,6 +164,25 @@ const VideoMenuOptions = (props) => {
     setVideoMenuOptionsView(
       (previousVideoMenuOptionsView) => !previousVideoMenuOptionsView
     );
+    dispatch(updateVideoSelected(selectedVideo));
+  };
+
+  const deleteExistingVideoFromPlaylistEvent = (
+    playlistDetailsProvided,
+    videoDetailsProvided
+  ) => {
+    if (!playlistOperationError) {
+      dispatch(
+        deleteExistingVideoFromPlaylist({
+          playlistDetailsGiven: playlistDetailsProvided,
+          videoToBeDeleted: videoDetailsProvided,
+          tokenProvided: encodedTokenReceived,
+        })
+      );
+      showAlerts("success", "Video removed from playlist");
+    } else {
+      showAlerts("Error", playlistOperationError);
+    }
   };
 
   useOnClickOutside(() => setVideoMenuOptionsView(false), menuOptionsRef);
@@ -222,17 +251,18 @@ const VideoMenuOptions = (props) => {
                       : "ADD TO FAVOURITES"}
                   </li>
                 }
-                { pathname!=="/playlists" &&
+                {pathname !== "/playlists" && (
                   <li
                     className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
-                    onClick={(clickEvent)=>{
+                    onClick={(clickEvent) => {
                       clickEvent.stopPropagation();
-                      dispatch(toggleModalDisplay())
-                    }}>
-                      <span className="material-icons">playlist_add</span>
-                      SAVE TO PLAYLIST
-                    </li>
-                }
+                      dispatch(toggleModalDisplay());
+                    }}
+                  >
+                    <span className="material-icons">playlist_add</span>
+                    SAVE TO PLAYLIST
+                  </li>
+                )}
                 {pathname === "/history" && (
                   <li
                     className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
@@ -245,7 +275,18 @@ const VideoMenuOptions = (props) => {
                     Remove From History
                   </li>
                 )}
-
+                {pathname === "/playlists" && (
+                  <li
+                    className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
+                    onClick={(clickEvent) => {
+                      clickEvent.stopPropagation();
+                      deleteExistingVideoFromPlaylistEvent(playlistData,selectedVideo)
+                    }}
+                  >
+                    <span className="material-icons-outlined">delete</span>
+                    Remove From Playlist
+                  </li>
+                )}
               </ul>
             </div>
           ) : null}

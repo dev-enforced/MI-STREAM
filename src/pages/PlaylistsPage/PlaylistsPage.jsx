@@ -11,6 +11,7 @@ import {
 } from "reduxFiles";
 import { useAlerts } from "hooks";
 const PlaylistsPage = () => {
+  const [playlistToBeViewedId, updatePlaylistToBeViewedId] = useState("");
   const { encodedTokenReceived } = useSelector(
     (storeReceived) => storeReceived.authenticationStore
   );
@@ -27,6 +28,7 @@ const PlaylistsPage = () => {
           tokenProvided: encodedTokenReceived,
         })
       );
+      updatePlaylistToBeViewedId("");
       showAlerts("success", "Removed this playlist");
     } else {
       showAlerts("error", playlistOperationError);
@@ -35,6 +37,19 @@ const PlaylistsPage = () => {
   useEffect(() => {
     dispatch(receiveAllUserPlaylists(encodedTokenReceived));
   }, [dispatch, encodedTokenReceived]);
+
+  //Handling which playlist to be shown in case a playlist gets deleted which is the first playlist
+  useEffect(() => {
+    if (playlistsProvided !== undefined) {
+      if (playlistsProvided.length !== 0 && playlistToBeViewedId === "") {
+        updatePlaylistToBeViewedId(playlistsProvided[0]._id);
+      }
+    }
+    //eslint-disable-next-line
+  }, [playlistsProvided]);
+  const selectedPlaylist = playlistsProvided.find(
+    (everyPlaylist) => everyPlaylist._id === playlistToBeViewedId
+  );
   return (
     <>
       {playlistsProvided.length === 0 ? (
@@ -57,17 +72,24 @@ const PlaylistsPage = () => {
               <span className="material-icons">playlist_add</span>
             </button>
             <h6 className={`${styles.playlist_collection_container_title}`}>
-              YOUR PLAYLISTS
+              YOUR PLAYLISTS ({playlistsProvided.length})
             </h6>
-            <ul>
+            <ul className={`${styles.playlist_collection}`}>
               {playlistsProvided.map((everyPlaylist) => {
                 const { _id, title: playlistTitle } = everyPlaylist;
                 return (
                   <li
                     key={_id}
-                    className={`${styles.playlist_collection_item}`}
+                    className={`${styles.playlist_collection_item} py-2`}
                   >
-                    <span>{playlistTitle}</span>
+                    <span
+                      onClick={() => {
+                        updatePlaylistToBeViewedId(_id);
+                      }}
+                      className={`${_id===playlistToBeViewedId?styles.selected_playlist:""} p-4`}
+                    >
+                      {playlistTitle}
+                    </span>
                     <span
                       className="material-icons-outlined"
                       onClick={() => {
@@ -81,7 +103,26 @@ const PlaylistsPage = () => {
               })}
             </ul>
           </div>
-          <div className={``}></div>
+          <div className={`${styles.single_playlist_details} g-flex-column`}>
+            <h3 className={`my-4`}>{selectedPlaylist?.title}</h3>
+            <p className={`my-4`}>{selectedPlaylist?.description}</p>
+            {selectedPlaylist?.videos.length === 0 ? (
+              <p className={`my-4 fw-700`}>NO Videos in this playlist</p>
+            ) : (
+              <div
+                className={`g-flex-column ${styles.single_playlist_details}`}
+              >
+                {selectedPlaylist?.videos.map((everyPlaylistVideo) => {
+                  return (
+                    <CollectionCard
+                      videoDetails={everyPlaylistVideo}
+                      playlistData={selectedPlaylist}
+                    />
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
       )}
     </>
