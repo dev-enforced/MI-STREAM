@@ -107,9 +107,6 @@ const addNewVideoToPlaylistHandler = async (
     );
     return playlistDataReceivedFromResponse;
   } catch (addNewVideoToPlaylistError) {
-    console.error(
-      "AN ERROR OCCURED WHILE ADDING THIS VIDEO TO THIS PLAYLIST THROUGH REDUX"
-    );
     return rejectWithValue(
       "Error occured while adding this video to a playlist. Please try again"
     );
@@ -130,11 +127,8 @@ const deleteExistingVideoFromPlaylistHandler = async (
     );
     return playlistDataReceivedFromResponse;
   } catch (deleteExistingVideoFromPlaylistError) {
-    console.error(
-      "AN ERROR OCCURED WHILE ADDING THIS VIDEO TO THIS PLAYLIST THROUGH REDUX"
-    );
     return rejectWithValue(
-      "Error occured while adding this video to a playlist. Please try again"
+      "Error occured while deleting this video from a playlist. Please try again"
     );
   }
 };
@@ -219,6 +213,7 @@ const playlistsSlice = createSlice({
       })
       .addCase(addNewVideoToPlaylist.pending, (state, action) => {
         state.status = "pending";
+        state.error = null;
       })
       .addCase(addNewVideoToPlaylist.fulfilled, (state, action) => {
         state.status = "fulfilled";
@@ -228,6 +223,7 @@ const playlistsSlice = createSlice({
             : everyPlaylist
         );
         state.playlistsProvided = playlistsUpdated;
+        state.error = null;
       })
       .addCase(addNewVideoToPlaylist.rejected, (state, action) => {
         state.status = "rejected";

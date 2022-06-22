@@ -38,10 +38,6 @@ const VideoMenuOptions = (props) => {
     (storeReceived) => storeReceived.watchLaterStore
   );
 
-  const {
-    error: playlistOperationError,
-  } = useSelector((storeReceived) => storeReceived.playlistsStore);
-
   const checkVideoPresentInLikes = (selectedVideoDetails) =>
     likedVideosList.some(
       (everyVideo) => everyVideo._id === selectedVideoDetails._id
@@ -171,18 +167,14 @@ const VideoMenuOptions = (props) => {
     playlistDetailsProvided,
     videoDetailsProvided
   ) => {
-    if (!playlistOperationError) {
-      dispatch(
-        deleteExistingVideoFromPlaylist({
-          playlistDetailsGiven: playlistDetailsProvided,
-          videoToBeDeleted: videoDetailsProvided,
-          tokenProvided: encodedTokenReceived,
-        })
-      );
-      showAlerts("success", "Video removed from playlist");
-    } else {
-      showAlerts("Error", playlistOperationError);
-    }
+    dispatch(
+      deleteExistingVideoFromPlaylist({
+        playlistDetailsGiven: playlistDetailsProvided,
+        videoToBeDeleted: videoDetailsProvided,
+        tokenProvided: encodedTokenReceived,
+      })
+    );
+    showAlerts("success", "Video removed from playlist");
   };
 
   useOnClickOutside(() => setVideoMenuOptionsView(false), menuOptionsRef);
@@ -280,7 +272,10 @@ const VideoMenuOptions = (props) => {
                     className={`${styles.menuOptionsListItem} g-flex-row g-flex-align-center`}
                     onClick={(clickEvent) => {
                       clickEvent.stopPropagation();
-                      deleteExistingVideoFromPlaylistEvent(playlistData,selectedVideo)
+                      deleteExistingVideoFromPlaylistEvent(
+                        playlistData,
+                        selectedVideo
+                      );
                     }}
                   >
                     <span className="material-icons-outlined">delete</span>

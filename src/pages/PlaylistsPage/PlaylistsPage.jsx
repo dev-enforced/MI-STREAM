@@ -15,24 +15,20 @@ const PlaylistsPage = () => {
   const { encodedTokenReceived } = useSelector(
     (storeReceived) => storeReceived.authenticationStore
   );
-  const { playlistsProvided, error: playlistOperationError } = useSelector(
+  const { playlistsProvided } = useSelector(
     (storeReceived) => storeReceived.playlistsStore
   );
   const dispatch = useDispatch();
   const { showAlerts } = useAlerts();
   const deleteExistingPlaylistEvent = (playlistToBeDeleted) => {
-    if (!playlistOperationError) {
-      dispatch(
-        deleteExistingPlaylist({
-          playlistDetailsGiven: playlistToBeDeleted,
-          tokenProvided: encodedTokenReceived,
-        })
-      );
-      updatePlaylistToBeViewedId("");
-      showAlerts("success", "Removed this playlist");
-    } else {
-      showAlerts("error", playlistOperationError);
-    }
+    dispatch(
+      deleteExistingPlaylist({
+        playlistDetailsGiven: playlistToBeDeleted,
+        tokenProvided: encodedTokenReceived,
+      })
+    );
+    updatePlaylistToBeViewedId("");
+    showAlerts("success", "Removed this playlist");
   };
   useEffect(() => {
     dispatch(receiveAllUserPlaylists(encodedTokenReceived));
@@ -50,6 +46,15 @@ const PlaylistsPage = () => {
   const selectedPlaylist = playlistsProvided.find(
     (everyPlaylist) => everyPlaylist._id === playlistToBeViewedId
   );
+
+  const getClassName = (selectedPlaylistId) => {
+    if (selectedPlaylistId === playlistToBeViewedId) {
+      return styles.selected_playlist;
+    } else {
+      return "";
+    }
+  };
+
   return (
     <>
       {playlistsProvided.length === 0 ? (
@@ -86,7 +91,7 @@ const PlaylistsPage = () => {
                       onClick={() => {
                         updatePlaylistToBeViewedId(_id);
                       }}
-                      className={`${_id===playlistToBeViewedId?styles.selected_playlist:""} p-4`}
+                      className={`${getClassName(_id)} p-4`}
                     >
                       {playlistTitle}
                     </span>
@@ -115,6 +120,7 @@ const PlaylistsPage = () => {
                 {selectedPlaylist?.videos.map((everyPlaylistVideo) => {
                   return (
                     <CollectionCard
+                      key={everyPlaylistVideo._id}
                       videoDetails={everyPlaylistVideo}
                       playlistData={selectedPlaylist}
                     />

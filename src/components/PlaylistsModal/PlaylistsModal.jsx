@@ -24,11 +24,9 @@ const PlaylistsModal = () => {
     newPlaylistInformation;
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const {
-    playlistsProvided,
-    error: playlistOperationError,
-    videoSelected: videoForPlaylist,
-  } = useSelector((storeReceived) => storeReceived.playlistsStore);
+  const { playlistsProvided, videoSelected: videoForPlaylist } = useSelector(
+    (storeReceived) => storeReceived.playlistsStore
+  );
   const { encodedTokenReceived } = useSelector(
     (storeReceived) => storeReceived.authenticationStore
   );
@@ -63,12 +61,15 @@ const PlaylistsModal = () => {
       showAlerts("success", "Playlist created successfully");
     }
   };
-
+  const checkVideoInPlaylist = (playlistData, selectedVideoData) =>
+    playlistData.videos.some(
+      (everyPlaylistVideo) => everyPlaylistVideo._id === selectedVideoData._id
+    );
   const addVideoToPlaylistEvent = (
     playlistDetailsProvided,
     videoDetailsProvided
   ) => {
-    if (!playlistOperationError) {
+    if (!checkVideoInPlaylist(playlistDetailsProvided, videoDetailsProvided)) {
       dispatch(
         addNewVideoToPlaylist({
           playlistDetailsGiven: playlistDetailsProvided,
@@ -78,7 +79,7 @@ const PlaylistsModal = () => {
       );
       showAlerts("success", "Video added to playlist");
     } else {
-      showAlerts("Error", playlistOperationError);
+      showAlerts("error", "An error has come up");
     }
   };
 
@@ -86,24 +87,15 @@ const PlaylistsModal = () => {
     playlistDetailsProvided,
     videoDetailsProvided
   ) => {
-    if (!playlistOperationError) {
-      dispatch(
-        deleteExistingVideoFromPlaylist({
-          playlistDetailsGiven: playlistDetailsProvided,
-          videoToBeDeleted: videoDetailsProvided,
-          tokenProvided: encodedTokenReceived,
-        })
-      );
-      showAlerts("success", "Video removed from playlist");
-    } else {
-      showAlerts("Error", playlistOperationError);
-    }
-  };
-
-  const checkVideoInPlaylist = (playlistData, selectedVideoData) =>
-    playlistData.videos.some(
-      (everyPlaylistVideo) => everyPlaylistVideo._id === selectedVideoData._id
+    dispatch(
+      deleteExistingVideoFromPlaylist({
+        playlistDetailsGiven: playlistDetailsProvided,
+        videoToBeDeleted: videoDetailsProvided,
+        tokenProvided: encodedTokenReceived,
+      })
     );
+    showAlerts("success", "Video removed from playlist");
+  };
 
   return (
     <Modal>
@@ -120,7 +112,9 @@ const PlaylistsModal = () => {
         ) : (
           <>
             <h5>SAVE TO A PLAYLIST</h5>
-            <ul className={`g-flex-column ${styles.existing_playlist_collection}`}>
+            <ul
+              className={`g-flex-column ${styles.existing_playlist_collection}`}
+            >
               {playlistsProvided?.map((everyPlaylist) => {
                 const { _id, title: everyPlaylistTitle } = everyPlaylist;
                 return (
