@@ -24,9 +24,11 @@ const PlaylistsModal = () => {
     newPlaylistInformation;
   const dispatch = useDispatch();
   const { pathname } = useLocation();
-  const { playlistsProvided, videoSelected: videoForPlaylist } = useSelector(
-    (storeReceived) => storeReceived.playlistsStore
-  );
+  const {
+    playlistsProvided,
+    videoSelected: videoForPlaylist,
+    status: statusOfOperation,
+  } = useSelector((storeReceived) => storeReceived.playlistsStore);
   const { encodedTokenReceived } = useSelector(
     (storeReceived) => storeReceived.authenticationStore
   );
@@ -48,7 +50,7 @@ const PlaylistsModal = () => {
   };
 
   const createNewPlaylistEvent = () => {
-    if (inputTitle === "" && inputDescription === "") {
+    if (inputTitle.trim() === "" || inputDescription.trim() === "") {
       showAlerts("info", "Please enter all details.");
     } else {
       dispatch(
@@ -69,7 +71,10 @@ const PlaylistsModal = () => {
     playlistDetailsProvided,
     videoDetailsProvided
   ) => {
-    if (!checkVideoInPlaylist(playlistDetailsProvided, videoDetailsProvided)) {
+    if (
+      !checkVideoInPlaylist(playlistDetailsProvided, videoDetailsProvided) &&
+      statusOfOperation !== "pending"
+    ) {
       dispatch(
         addNewVideoToPlaylist({
           playlistDetailsGiven: playlistDetailsProvided,
@@ -79,7 +84,7 @@ const PlaylistsModal = () => {
       );
       showAlerts("success", "Video added to playlist");
     } else {
-      showAlerts("error", "An error has come up");
+      showAlerts("info", "Video is already present in playlist");
     }
   };
 
@@ -87,14 +92,16 @@ const PlaylistsModal = () => {
     playlistDetailsProvided,
     videoDetailsProvided
   ) => {
-    dispatch(
-      deleteExistingVideoFromPlaylist({
-        playlistDetailsGiven: playlistDetailsProvided,
-        videoToBeDeleted: videoDetailsProvided,
-        tokenProvided: encodedTokenReceived,
-      })
-    );
-    showAlerts("success", "Video removed from playlist");
+    if (statusOfOperation !== "pending") {
+      dispatch(
+        deleteExistingVideoFromPlaylist({
+          playlistDetailsGiven: playlistDetailsProvided,
+          videoToBeDeleted: videoDetailsProvided,
+          tokenProvided: encodedTokenReceived,
+        })
+      );
+      showAlerts("success", "Video removed from playlist");
+    }
   };
 
   return (

@@ -213,7 +213,7 @@ const playlistsSlice = createSlice({
       })
       .addCase(addNewVideoToPlaylist.pending, (state, action) => {
         state.status = "pending";
-        state.error = null;
+        
       })
       .addCase(addNewVideoToPlaylist.fulfilled, (state, action) => {
         state.status = "fulfilled";
@@ -223,7 +223,6 @@ const playlistsSlice = createSlice({
             : everyPlaylist
         );
         state.playlistsProvided = playlistsUpdated;
-        state.error = null;
       })
       .addCase(addNewVideoToPlaylist.rejected, (state, action) => {
         state.status = "rejected";

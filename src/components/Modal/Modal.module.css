@@ -3,4 +3,6 @@
   inset: 0;
   background-color: #00000066;
   z-index: 10;
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
 }
