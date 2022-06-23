@@ -7,6 +7,8 @@ import authenticationReducer from "../reducers/authentication/authenticationSlic
 import likesReducer from "../reducers/likes/likesSlice";
 import watchLaterReducer from "../reducers/watch-later/watchLaterSlice";
 import historyReducer from "../reducers/history/historySlice";
+import playlistsReducer from "../reducers/playlists/playlistsSlice";
+import modalDisplayReducer from "../reducers/modalDisplay/modalDisplaySlice";
 const storeGiven = configureStore({
   reducer: {
     theme: themeReducer,
@@ -17,6 +19,8 @@ const storeGiven = configureStore({
     likesStore: likesReducer,
     watchLaterStore: watchLaterReducer,
     historyStore: historyReducer,
+    playlistsStore: playlistsReducer,
+    modalDisplayStore: modalDisplayReducer,
   },
 });
 export { storeGiven };

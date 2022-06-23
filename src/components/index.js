@@ -13,3 +13,5 @@ export { Alerts } from "./Alerts/Alerts";
 export { ScrollToTop } from "./ScrollToTop/ScrollToTop";
 export { VideoSuggestionCard } from "./VideoSuggestionCard/VideoSuggestionCard";
 export { CollectionCard } from "./CollectionCard/CollectionCard";
+export { Modal } from "./Modal/Modal";
+export { PlaylistsModal } from "./PlaylistsModal/PlaylistsModal";

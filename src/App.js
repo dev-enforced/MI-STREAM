@@ -1,6 +1,12 @@
 import { AppRoutes } from "routes";
 import { useSelector } from "react-redux";
-import { UpperNavbar, Sidebar, Alerts, ScrollToTop } from "components";
+import {
+  UpperNavbar,
+  Sidebar,
+  Alerts,
+  ScrollToTop,
+  PlaylistsModal,
+} from "components";
 import styles from "./App.module.css";
 
 function App() {
@@ -22,6 +28,7 @@ function App() {
             <AppRoutes />
           </div>
         </div>
+        <PlaylistsModal />
         <Alerts />
       </ScrollToTop>
     </div>

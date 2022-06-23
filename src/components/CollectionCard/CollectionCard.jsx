@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { VideoMenuOptions } from "components";
 import { getVideoImg, viewCountFormatter } from "utilities";
 import styles from "./CollectionCard.module.css";
-const CollectionCard = ({ videoDetails }) => {
+const CollectionCard = ({ videoDetails, playlistData }) => {
   const navigate = useNavigate();
   const [videoMenuOptionsView, setVideoMenuOptionsView] = useState(false);
   const { _id, title, viewQuantity, dateOfUpload } = videoDetails;
@@ -44,6 +44,7 @@ const CollectionCard = ({ videoDetails }) => {
           selectedVideo={videoDetails}
           videoMenuOptionsView={videoMenuOptionsView}
           setVideoMenuOptionsView={setVideoMenuOptionsView}
+          playlistData={playlistData}
         />
       </div>
     </div>

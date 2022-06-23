@@ -1,8 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useLocation } from "react-router-dom";
+import { toggleModalDisplay } from "reduxFiles";
 import styles from "./EmptyPage.module.css";
-
 const EmptyPage = ({ messageToBeDisplayed, imageToBeDisplayed }) => {
+  const { pathname } = useLocation();
+  const dispatch = useDispatch();
   return (
     <div
       className={`${styles.empty_collection_container} g-flex-row g-flex-center`}
@@ -21,6 +24,16 @@ const EmptyPage = ({ messageToBeDisplayed, imageToBeDisplayed }) => {
         <Link className={`link-none ${styles.explore_more_btn}`} to="/explore">
           EXPLORE MORE
         </Link>
+        {pathname === "/playlists" && (
+          <button
+            className={`link-none ${styles.explore_more_btn}`}
+            onClick={() => {
+              dispatch(toggleModalDisplay());
+            }}
+          >
+            CREATE PLAYLIST
+          </button>
+        )}
       </div>
     </div>
   );

@@ -26,3 +26,13 @@ export {
   clearEntireHistory,
   removeExistingVideoFromHistory,
 } from "./history/historySlice";
+export {
+  receiveAllUserPlaylists,
+  createNewPlaylist,
+  deleteExistingPlaylist,
+  receiveSinglePlaylistDetails,
+  addNewVideoToPlaylist,
+  deleteExistingVideoFromPlaylist,
+  updateVideoSelected,
+} from "./playlists/playlistsSlice";
+export { toggleModalDisplay } from "./modalDisplay/modalDisplaySlice";
