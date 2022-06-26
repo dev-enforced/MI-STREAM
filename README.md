@@ -44,7 +44,7 @@
 
 ## About The Project
 
-<!-- ![product-screenshot](/src/assets/velstream.gif) -->
+
 
 With MI-STREAM you can get familiar with the interview process by watching videos for four major professions, Product Management, Software Development, Management Entrances and Public Sector Professions. You can create a playlist for your favorite interview or save it to watch later, all for absolutely free.
 
