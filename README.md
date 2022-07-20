@@ -36,15 +36,12 @@
     <li><a href="#how-to-use">How To Use</a></li>
     <li><a href="#folder-structure">Folder Structure</a></li>
     <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
 
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
-
-
 
 With MI-STREAM you can get familiar with the interview process by watching videos for four major professions, Product Management, Software Development, Management Entrances and Public Sector Professions. You can create a playlist for your favorite interview or save it to watch later, all for absolutely free.
 
@@ -56,6 +53,7 @@ With MI-STREAM you can get familiar with the interview process by watching video
 
 - [ReactJS](https://reactjs.org/)
 - [React Router](https://reactrouter.com/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
 - [Youtube](https://youtube.com/)
 - [Gentle UI](https://gentle-ui.netlify.app/)
 - [Mockbee](https://www.mockbe.netlify.app/)
