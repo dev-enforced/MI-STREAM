@@ -2,13 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { sidebarLinks } from "constants";
-import { updateSidebarView } from "reduxFiles";
+import { closeSidebarView} from "reduxFiles";
 import { getActiveSideLinkStyle } from "utilities";
 import styles from "./Sidebar.module.css";
 const SidebarMinimized = () => {
   const dispatch = useDispatch();
   const toggleSidebarView = () => {
-    dispatch(updateSidebarView());
+    dispatch(closeSidebarView());
   };
   return (
     <div className={`${styles.sidebarWithIcons} g-flex-column py-4`}>

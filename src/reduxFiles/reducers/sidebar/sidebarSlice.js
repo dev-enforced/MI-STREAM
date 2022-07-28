@@ -9,7 +9,13 @@ const sidebarSlice = createSlice({
     updateSidebarView: (state) => {
       state.sidebarView = !state.sidebarView;
     },
+    closeSidebarView: (state) => {
+      state.sidebarView = false;
+    },
+    openSidebarView:(state)=>{
+      state.sidebarView=true;
+    }
   },
 });
-export const { updateSidebarView } = sidebarSlice.actions;
+export const { updateSidebarView, closeSidebarView,openSidebarView } = sidebarSlice.actions;
 export default sidebarSlice.reducer;

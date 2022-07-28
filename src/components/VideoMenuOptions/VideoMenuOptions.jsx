@@ -239,8 +239,8 @@ const VideoMenuOptions = (props) => {
                       thumb_up
                     </span>
                     {checkVideoPresentInLikes(selectedVideo) && isUserLoggedIn
-                      ? "REMOVE FROM FAVOURITES"
-                      : "ADD TO FAVOURITES"}
+                      ? "REMOVE FROM LIKES"
+                      : "ADD TO LIKES"}
                   </li>
                 }
                 {pathname !== "/playlists" && (
