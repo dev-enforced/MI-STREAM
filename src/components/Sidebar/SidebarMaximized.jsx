@@ -2,20 +2,23 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { sidebarLinks } from "constants";
-import { updateSidebarView } from "reduxFiles";
+import { closeSidebarView, openSidebarView } from "reduxFiles";
 import { getActiveSideLinkStyle } from "utilities";
 import styles from "./Sidebar.module.css";
 const SidebarMaximized = () => {
   const dispatch = useDispatch();
   const toggleSidebarView = () => {
-    dispatch(updateSidebarView());
+    dispatch(openSidebarView());
   };
+  const closeSidebar=()=>{
+    dispatch(closeSidebarView());
+  }
 
   return (
     <div className={`${styles.sidebarLinksContainer} g-flex-column`}>
       <button
         className={`miBtn text-cursor-pointer ${styles.closeMenu}`}
-        onClick={toggleSidebarView}
+        onClick={closeSidebar}
       >
         <span className="material-icons-outlined">close</span>
       </button>

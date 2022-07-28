@@ -41,6 +41,8 @@
   background-color: var(--bg-clr-choice);
   color: var(--text-clr-choice);
   border: 1px solid rgb(165, 165, 165);
+  /* This line is to remove non functional search bar */
+  visibility: hidden;
 }
 .miSearchSection i {
   color: var(--text-clr-choice);
@@ -64,7 +66,8 @@
   margin: 0.5rem auto;
 }
 @media screen and (max-width: 768px) {
-  .searchForMobile,
+  /* .searchForMobile, */
+  /* This above line is commented to remove non functional search bar */
   .showMenuBtn {
     display: block;
   }

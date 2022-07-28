@@ -1,5 +1,5 @@
 export { updateTheme } from "./theme/themeSlice";
-export { updateSidebarView } from "./sidebar/sidebarSlice";
+export { updateSidebarView,closeSidebarView,openSidebarView } from "./sidebar/sidebarSlice";
 export {
   getCategories,
   updateCategorySelected,
