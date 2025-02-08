@@ -10,14 +10,14 @@ export const categories = [
     _id: uuid(),
     categoryName: "Product Management",
     imgUrl:
-      "https://www.tcgen.com/wp-content/uploads/2021/06/product-portfolio-management-process-1536x1086.png",
+      "https://www.smartsheet.com/sites/default/files/styles/1300px/public/2020-06/IC-Product-Portfolio-Management-Flowchart_PowerPoint.webp?itok=2Fg2sdEq",
     description:
       "Product management involves driving the vision, strategy, design, and execution of an organisation's product. While one can often quickly comprehend the basic responsibilities of the role, mastering each of these dimensions is truly an art form that one is constantly honing",
   },
   {
     _id: uuid(),
     categoryName: "Management Entrances",
-    imgUrl: "https://xlrij.remotexs.in/sites/default/files/5-5.jpg",
+    imgUrl: "https://www.livelaw.in/h-upload/2023/10/15/750x450_498605-iim-ahmedabad.webp",
     description:
       "After cracking the entrance exam, your next challenge is to perform well in the WAT-PI round. It is your one shot to make an impression on your dream B-school of why you'd make a great fit in the classroom. Students who crack this round prepare themselves for personal, technical and case study questions.",
   },
@@ -32,7 +32,7 @@ export const categories = [
   {
     _id: uuid(),
     categoryName: "Public Sector Professions",
-    imgUrl: "https://pbs.twimg.com/media/FOBpsu1VIAIonlX?format=jpg",
+    imgUrl: "https://blog.madeeasy.in/wp-content/uploads/2018/05/psus-interview-guidance-800x445.jpg",
     description:
       "Services provided by the government for public purposes also have a competitive hiring process involving interviews testing how well does the candidate perform under pressure. Learning from the experiences of ones who cleared it make the candidate get familiar with what they are going to face in the final round.",
   },
